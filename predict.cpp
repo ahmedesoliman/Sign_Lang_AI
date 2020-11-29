@@ -1,5 +1,4 @@
 #include "predict.h"
-#include "backgroundremover.h"
 
 
 //defualt constructor

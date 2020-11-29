@@ -31,7 +31,7 @@ Sign language is a language that consists of body movements, especially of hand 
 
 Usually, a sign language interpreter is used by deaf people to seek help for translating their thoughts to all of us. My prototype will help in identifying the alphabet and give the output in a text/speech format. Later these alphabets can be used to form sentences. The model helps the muted people to communicate with everyone and express themselves. This not only makes their life emotionally better but also makes them more employable and independent. It also becomes a lot easier for everyone to understand the muted people who would in-turn be able to help them.
 
-# Architecture
+# Architecture:
 
 The proposed system uses the Convolutional Neural Network (CNN) architecture. CNN network consists of different layers that process the input alphabets and symbols and produces the desired output. I’m working on creating a model that can help society in a broader way by bridging the communication gap between Deaf-Muted people and everyone else. I propose a system, acting as an interface between the Deaf-dumb community and non-disabled people based on American Sign Language (ASL). The speech Conversion system helps in decoding those symbols without the need of an expert person who understands sign language.
 
@@ -57,11 +57,11 @@ One of the most important objectives of the model is to decrease the communicati
 # Threshold
 
 - Threshold for the colors is as below:
-  BlacK: 0, 0, 0
-  Red: 255, 0, 0
-  Green: 0, 255, 0
-  Yellow: 255, 255, 0
-  Blue: 0, 0, 255
+- BlacK: 0, 0, 0
+- Red: 255, 0, 0
+- Green: 0, 255, 0
+- Yellow: 255, 255, 0
+- Blue: 0, 0, 255
 
 # Traning
 

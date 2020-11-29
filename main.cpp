@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     Predict predict;             //predict object
-   ///* predict.run();  */            //run app
+   ///* predict.run();  */       //run app
 
 
    char keyboard = 0;           // last key pressed

@@ -2,7 +2,8 @@
 
 
 //defualt constructor
-Predict::Predict(void) {
+Predict::Predict() {
+
 
 }
 

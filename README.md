@@ -1,6 +1,6 @@
 # Sign_Lang_AI
 
-# Requirements
+# Requirements:
 
 - Visual Studio Community
   1st: Download & install Visual Studio 2019 Community Edition
@@ -10,7 +10,7 @@
   Step 1: Add to path
   Step 2: Create a project in Visual Studio 2019
 
-# Steps
+# Setup Steps:
 
 - Set platform target to x64 — Pre-built binaries are built for x64 Windows platforms.
 - Add to Include Directories —Tell the compiler how the OpenCV library looks. This is done by providing a path to the header files (build/include).
@@ -41,7 +41,7 @@ The extracted feature is then passed into the neural network algorithms which pa
 
 One of the most important objectives of the model is to decrease the communication gap between hearing-impaired people and everyone else and use this technology to its best in order to smooth integration of these differently-abled people in our society.
 
-# Challenges
+# Challenges:
 
 # Capture
 
@@ -71,4 +71,6 @@ The images should be stored in a subfolder/dataset for maintainance.
 
 # Future Scope
 
-Future enhancement if the system can be done through making the system can interpret words and store it which later can be used to create snectences. The system can also be integrated into other operating systems ot devices which will help to convert sign languge to text.
+Future enhancement if the system can be done through developing a system that ca detect the hand gesture in real time with a more acurate mesusres. The system can interpret words and stores it in a database or a text file which later can be used to create snectences. The system can also be integrated into other operating systems or devices which will help to convert sign languge to text.
+
+### AHMED SOLIMAN

@@ -20,11 +20,11 @@ void Predict::asl_init()
     int numframe = 0;
     Mat frame;
 
-    //************Preload letter images starts*********//
+    //************Preload letter train images starts*********//
     for (int i = 0; i < MAX_LETTERS; i++)
     {
         char buffer[13 * sizeof(char)];
-        sprintf_s(buffer, "images/%c.jpg", (char)('a' + i));
+        sprintf_s(buffer, "train/%c.jpg", (char)('a' + i));
         Mat img1 = imread(buffer, 1);
         if (img1.data)
         {
@@ -44,7 +44,7 @@ void Predict::asl_init()
         }
     }
 
-    //************Preload letter images ends*********//
+    //************Preload letter train images  ends*********//
 
 
 
@@ -183,7 +183,7 @@ void Predict::f4_identifyletter()
     {
         printf("Thread #4: Identify letter\n\r");
 
-        // Compare to reference images
+        // Compare to reference train
         if (feature_image.size() > 0 && frames++ > SAMPLE_RATE && feature_image[maxIndex].size() >= 5)
         {
             RotatedRect testRect = fitEllipse(feature_image[maxIndex]);
@@ -427,7 +427,7 @@ void Predict::run(char key) {
 
                 // write to file
                 char buffer[13 * sizeof(char)];
-                sprintf_s(buffer, "images/%c.jpg", (char)key);
+                sprintf_s(buffer, "train/%c.jpg", (char)key);
                 imwrite(buffer, drawing1);
             }
 
@@ -444,7 +444,7 @@ void Predict::run(char key) {
 void  Predict::train() {
 
     String folder1path = "./data/*.jpg";
-    String folder2 = "./images/*.jpg";
+    String folder2 = "./train/*.jpg";
     vector<String> datafiles;
     vector<String> loadedfiles;
 
@@ -463,9 +463,9 @@ void  Predict::train() {
         
         subtract(loaded_img, data_img, dst);
 
-        //if (dst <= data_img) {
+        if (dst <= data_img) {
 
-        //}
+        }
 
         imshow("dst", dst);
         //dst = loaded_img - data_img;

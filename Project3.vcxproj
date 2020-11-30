@@ -24,7 +24,7 @@
     <ProjectGuid>{e1780e14-8998-42bd-b83e-fba4e632e982}</ProjectGuid>
     <RootNamespace>Project3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>SignLang_AI</ProjectName>
+    <ProjectName>Sign_Lang_AI</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -81,6 +81,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\OpenCV\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\OpenCV\x64\vc16\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>Sign_Lang_AI</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>

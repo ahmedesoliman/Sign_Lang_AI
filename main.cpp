@@ -35,23 +35,25 @@ int main()
     }
 
     if (debug_mode) {
-        predict.asl_init();
 
-        std::thread t1(&Predict::f1_captureimage, &predict);
+        predict.train();
+        //predict.asl_init();
+
+        //std::thread t1(&Predict::f1_captureimage, &predict);
    
-        std::thread t2(&Predict::f2_extracthand, &predict);
+        //std::thread t2(&Predict::f2_extracthand, &predict);
 
-        std::thread t3(&Predict::f3_extractfeature, &predict);
+        //std::thread t3(&Predict::f3_extractfeature, &predict);
 
-        std::thread t4(&Predict::f4_identifyletter, &predict);
-        
-        std::thread t5(&Predict::f5_displayletter, &predict);
-        
-        t1.join();
-        t2.join();
-        t3.join();
-        t4.join();
-        t5.join();
+        //std::thread t4(&Predict::f4_identifyletter, &predict);
+        //
+        //std::thread t5(&Predict::f5_displayletter, &predict);
+        //
+        //t1.join();
+        //t2.join();
+        //t3.join();
+        //t4.join();
+        //t5.join();
     }
 
 	//predict.train();

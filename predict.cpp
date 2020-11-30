@@ -444,17 +444,31 @@ void Predict::run(char key) {
 void  Predict::train() {
 
     String folder1path = "./data/*.jpg";
-    String folder2 = "./images/*."
-    vector<String> filenames;
+    String folder2 = "./images/*.jpg";
+    vector<String> datafiles;
+    vector<String> loadedfiles;
 
-    cv::glob(folderpath, filenames);
+    Mat loaded_img, data_img, dst;
 
+    cv::glob(folder1path, datafiles);
+    cv::glob(folder2, loadedfiles);
 
-
-    for (size_t i = 0; i < filenames.size(); i++)
+    for (size_t i = 0; i < loadedfiles.size(); i++) {
+        
+        loaded_img = imread(loadedfiles[i], IMREAD_GRAYSCALE);
+    }
+    for (size_t i = 0; i < datafiles.size(); i++)
     {
-        Mat loaded_img = imread(filenames[i], IMREAD_GRAYSCALE);
-        substract(loaded_img, )
+        data_img = imread(datafiles[i], IMREAD_GRAYSCALE);
+        
+        subtract(loaded_img, data_img, dst);
+
+        //if (dst <= data_img) {
+
+        //}
+
+        imshow("dst", dst);
+        //dst = loaded_img - data_img;
     }
 
  }

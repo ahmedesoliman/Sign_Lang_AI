@@ -33,7 +33,7 @@ Usually, a sign language interpreter is used by deaf people to seek help for tra
 
 # Architecture:
 
-<img src= "./images/Project_Diagram.jpg" width="1000">
+<img src= "./images/Project_Diagram.jpg" width=auto height= auto>
 
 The proposed system uses the Convolutional Neural Network (CNN) architecture. CNN network consists of different layers that process the input alphabets and symbols and produces the desired output. I’m working on creating a model that can help society in a broader way by bridging the communication gap between Deaf-Muted people and everyone else. I propose a system, acting as an interface between the Deaf-dumb community and non-disabled people based on American Sign Language (ASL). The speech Conversion system helps in decoding those symbols without the need of an expert person who understands sign language.
 

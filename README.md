@@ -55,6 +55,7 @@ One of the most important objectives of the model is to decrease the communicati
 # Detection
 
 - Image should be converted into grayscale image and hand should be detected using contour analysis and extraction.
+- Runing the system in real time using std::threads.
 
 # Threshold
 
@@ -67,9 +68,9 @@ One of the most important objectives of the model is to decrease the communicati
 
 # Traning
 
-The system should have a feature to allow new users to train the letters.  
- There should be no overwriting of a letter refrence image with another letter during traning.
-The images should be stored in a subfolder/dataset for maintainance.
+- The system should have a feature to allow new users to train the letters.
+- There should be no overwriting of a letter refrence image with another letter during traning.
+- The images should be stored in a subfolder/dataset for maintainance.
 
 # Future Scope
 

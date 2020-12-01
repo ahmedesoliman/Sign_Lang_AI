@@ -94,7 +94,7 @@ public:
 	int distance_2(vector<Point>, vector<Point>);		//this method take two vectors of points a and b
 	double distance(vector<Point>, vector<Point>);		//this method find the distance of 
 	void train(char);
-	void predict(char)
+	void predict(char);
 	//void train();
 };
 

@@ -17,9 +17,9 @@ int main()
 
     int debug_mode = 0;         // 0= no debug; 1= debug
 
-    int predict_mode = 0        // 0= no predict; 1=predict
+    int predict_mode = 0;        // 0= no predict; 1=predict
 
-    cout << "Press (T) to train - (P) to predict or (D) to Debug: ";
+    cout << "Press: (T) to train - (P) to predict - (D) to Debug: ";
 
     cin >> keyboard;
 
@@ -32,7 +32,7 @@ int main()
         debug_mode = 1;
     }
 
-    if (keyboard == 'P' || keyboard == 'd') {
+    if (keyboard == 'P' || keyboard == 'p') {
         
         predict_mode = 1;
     }

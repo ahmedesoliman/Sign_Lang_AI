@@ -445,7 +445,7 @@ void Predict::run(char key)
             }
 
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
-            ofstream 
+
         }
     }
 

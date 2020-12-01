@@ -36,7 +36,7 @@ using namespace std;
 // Global data (macro definitions)
 #define DIFF_THRESH 230					// Maximum difference threshold to accept an input
 #define KEY_ESC (27)					//defining the escape button;
-#define MAX_LETTERS 26					// Number of letters
+#define MAX_LETTERS 26					// Number of letters 26 
 #define NUM_LAST_LETTERS 3			    // Number of letters to store;
 #define MIN_FREQ 2					    // Minimum frequency of last letters;
 #define THRESH 200
@@ -62,12 +62,15 @@ private:
 	int reset = 0;
 	
 	// Private members 
+	Mat frame;                              // current frame
 	Mat rgb_image;                          // output f1--> rgb_imge
 	Mat binary_image;
 	Mat drawing;							// output f2--> binary_image
 	Mat threshold_output;					// Generate the tresholdoutput
 
+	//this is 2D vector like matrix on OpenCV
 	vector<vector<Point>> feature_image;	// output f3--> feature_image
+	vector<vector<Point>> contours;			// returns a vector<vector<Point>>
 
 	char asl_letter;						// output f4--> asl_letter
 
@@ -79,7 +82,6 @@ private:
 
 	vector<Vec4i> hierarchy;				// Vec4i is a structure for representing a vector with 4 dimensions, with each value an int
 
-	vector<vector<Point>> contours;			//findContours() method returns a vector<vector<Point>>
 
 public:
 	Predict();

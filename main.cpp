@@ -32,6 +32,7 @@ int main()
 
     if (training_mode)
     {
+        predict.asl_init();
         predict.run(keyboard);
 
     }

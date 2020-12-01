@@ -448,39 +448,39 @@ void Predict::run(char key) {
         capture.release();  // Delete capture object
  }
 
-void  Predict::train() {
-
-    String folder1 = "./data/*.jpg";
-    String folder2 = "./train/*.jpg";
-
-    vector<String> datafiles;
-    vector<String> loadedfiles;
-
-    Mat train_img, data_img, dst;
-
-    cv::glob(folder1, datafiles);
-    cv::glob(folder2, loadedfiles);
-    
-    for (size_t i = 0; i < loadedfiles.size(); i++) {
-
-        train_img = imread(loadedfiles[i], IMREAD_GRAYSCALE);
-
-    }
-  
-    for (size_t i = 0; i < datafiles.size(); i++)
-    {
-
-        data_img = imread(datafiles[i], IMREAD_GRAYSCALE);
-
-    }
-
-    subtract(train_img, data_img, dst);
-
-    if (dst.shape == data_img.shape) {
-
-    }
-
-    imshow("dst", dst);
-
-}
- }
+//void Predict::train() {
+//
+//    String folder1 = "./data/*.jpg";
+//    String folder2 = "./train/*.jpg";
+//
+//    vector<String> dataFiles;
+//    vector<String> trainFiles;
+//
+//    Mat train_img, data_img, dst;
+//
+//    cv::glob(folder1, dataFiles);
+//    cv::glob(folder2, trainFiles);
+//    
+//    for (size_t i = 0; i < trainFiles.size(); i++) {
+//
+//        train_img = imread(trainFiles[i], IMREAD_GRAYSCALE);
+//
+//
+//    }
+//  
+//    for (size_t i = 0; i < dataFiles.size(); i++)
+//    {
+//
+//        data_img = imread(dataFiles[i], IMREAD_GRAYSCALE);
+//
+//    }
+//
+//    subtract(train_img, data_img, dst);
+//
+//    if ( == data_img) {
+//
+//    }
+//
+//    imshow("dst", dst);
+//
+//}

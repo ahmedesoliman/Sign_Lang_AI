@@ -42,6 +42,14 @@ using namespace std;
 class Predict
 {
 private:
+
+	bool captureReady;
+	bool handReady;
+	bool featureReady;
+	bool signReady;
+	bool displayReady;
+
+
 	int frames = 0;                         // frames varaible to count how many frames processed
 	int maxIndex = 0;
 	int reset = 0;

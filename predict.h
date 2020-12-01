@@ -24,6 +24,11 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <thread>
+#include <mutex>
+
+#include <condition_variable>
+
+
 
 using namespace cv;
 using namespace std;
@@ -42,6 +47,8 @@ using namespace std;
 class Predict
 {
 private:
+	std::mutex mtx;
+	std::condition_variable cond;
 
 	bool captureReady;
 	bool handReady;

@@ -1,6 +1,5 @@
 #include "predict.h"
 
-
 //defualt constructor
 Predict::Predict() {
 
@@ -65,7 +64,11 @@ void Predict::f1_captureimage()
     while (true)
     {
 
+        //unique_lock<mutex> locker(mtx);
+        //cond.wait(locker /*, [this]{return displayReady;}*/);
+        
         cout << "Thread #1: Capture Image\n ";
+
             // Create the capture object
             if (!capture.isOpened())
             {
@@ -79,7 +82,7 @@ void Predict::f1_captureimage()
                 cout << "Exiting..." << endl;
                 exit(EXIT_FAILURE);
             }
-            Rect myROI(100, 100, 200, 200); // Crop Frame to smaller region : output --> rgb_image
+            Rect myROI(200, 200, 200, 200); // Crop Frame to smaller region : output --> rgb_image
 
             rgb_image = frame(myROI);
 
@@ -89,10 +92,10 @@ void Predict::f1_captureimage()
 
             //********************************//
             cout << "\nThread #1 exeuted...\n";
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
+            
             captureReady = true;
-            f2_extracthand();
+            cond.notify_one();
+    
     }
     capture.release();
 }
@@ -102,27 +105,27 @@ void Predict::f2_extracthand()
 {
     while (true)
     {
+        unique_lock<mutex> locker(mtx);
+        cond.wait(locker, [this] {return captureReady;});
         cout << "Thread #2: Extract hand\n";
-
-        if (captureReady == true) {
-            if (reset <= 10)
+            
+  /*      if (reset <= 10)
             {
                 reset++;
                 backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 16, true);
-            }
+            }*/
 
             backGroundMOG2->apply(rgb_image, binary_image, 0);
 
             imshow("Binary Image", binary_image);
+            
+            char q = waitKey(33);
 
             //********************************//
             cout << "\nThread #2 exeuted...\n";
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             
-            handReady = true; 
-
-        }
-        else captureReady = false;
+            handReady = true;
+            cond.notify_one(); //Unblocks one of the threads currently waiting for this condition. If no threads are waiting, the function does nothing. If more than one, it is unspecified which of the threads is selected.
     }
 }
 
@@ -134,9 +137,11 @@ void Predict::f3_extractfeature()
 
         Mat threshold_output; // Generate the tresholdoutput
 
+        unique_lock<mutex> locker(mtx);
+        cond.wait(locker,[this] {return handReady;});
+
         cout << "Thread #3: Extract Feature\n";
 
-        if (handReady == true) {
             threshold(binary_image, threshold_output, THRESH, 255, THRESH_BINARY); // Detect edges using Threshold
 
             findContours(threshold_output, feature_image, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0)); // Find contours
@@ -169,26 +174,26 @@ void Predict::f3_extractfeature()
             drawContours(contourImg, feature_image, maxIndex, Scalar(0, 0, 255), 2, 8, hierarchy, 0, Point(0, 0));
 
             // Reset if too much noise
-            Scalar sums = sum(drawing);
-            int s = sums[0] + sums[1] + sums[2] + sums[3];
-            if (s >= RESET_THRESH)
-            {
-                reset = 10;
-            }
+            //Scalar sums = sum(drawing);
+            //int s = sums[0] + sums[1] + sums[2] + sums[3];
+            //if (s >= RESET_THRESH)
+            //{
+            //    reset = 10;
+            //}
 
             imshow("Foreground", drawing);
             if (contourImg.rows > 0)
                 imshow("th3_extractfeature", contourImg);
+            
+            
             char q = waitKey(33);
 
 
             //********************************//
             cout << "\nThread #3 executed...\n";
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
+  
             featureReady = true;
-        }
-        else handReady = false;
+            cond.notify_one();
     }
 }
 
@@ -197,68 +202,67 @@ void Predict::f4_identifyletter()
 {
     while (true)
     {
-        if (featureReady == true) {
-            cout << "\nThread #4: Identify letter\n";
+        unique_lock<mutex> locker(mtx);
+        cond.wait(locker, [this] {return featureReady;});
+        cout << "\nThread #4: Identify letter\n";
 
-            // Compare to reference train images 
-            if (feature_image.size() > 0 && frames++ > SAMPLE_RATE && feature_image[maxIndex].size() >= 5)
+        // Compare to reference train images 
+        if (feature_image.size() > 0 && frames++ > SAMPLE_RATE && feature_image[maxIndex].size() >= 5)
+        {
+            RotatedRect testRect = fitEllipse(feature_image[maxIndex]);
+
+            frames = 0;
+
+            double lowestDiff = HUGE_VAL;
+
+            for (int i = 0; i < MAX_LETTERS; i++)
             {
-                RotatedRect testRect = fitEllipse(feature_image[maxIndex]);
+                if (letters[i].size() == 0)
+                    continue;
 
-                frames = 0;
+                double diff = distance(letters[i], feature_image[maxIndex]);
 
-                double lowestDiff = HUGE_VAL;
-
-                for (int i = 0; i < MAX_LETTERS; i++)
+                if (diff < lowestDiff)
                 {
-                    if (letters[i].size() == 0)
-                        continue;
-
-                    double diff = distance(letters[i], feature_image[maxIndex]);
-
-                    if (diff < lowestDiff)
-                    {
-                        lowestDiff = diff;
-                        asl_letter = 'a' + i;
-                    }
+                    lowestDiff = diff;
+                    asl_letter = 'a' + i;
                 }
+            }
 
-                if (lowestDiff > DIFF_THRESH)
-                { // Dust
-                    asl_letter = 0;
-                }
-
-
-                cout << asl_letter << " | diff: " << lowestDiff << endl;
-
-                cout << "| diff: %f \n", lowestDiff;
+            if (lowestDiff > DIFF_THRESH)
+            { // Dust
+                asl_letter = 0;
             }
 
 
-            //********************************//
-            cout << "\nThread #4 exeuted... \n";
+            cout << asl_letter << " | diff: " << lowestDiff << endl;
 
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
-            signReady = true;
+            cout << "| diff: %f \n", lowestDiff;
         }
-        else featureReady = false;
+
+
+        //********************************//
+        cout << "\nThread #4 exeuted... \n";
+
+        signReady = true;
+        cond.notify_one();
     }
 }
 
 //this fucntion displays the letter
-void Predict::f5_displayletter()
-{
-    int letterCount = 0; // number of letters captured since last display
-    char lastLetters[NUM_LAST_LETTERS] = { 0 };
-    
-    //creates a Mat object filled with zeros
-    Mat letter_image = Mat::zeros(200, 200, CV_8UC3);
-    char lastExecLetter = 0; // last letter sent to doSystemCalls()
-
-    while (true)
+    void Predict::f5_displayletter()
     {
-        if (signReady == true) {
+        int letterCount = 0; // number of letters captured since last display
+        char lastLetters[NUM_LAST_LETTERS] = { 0 };
+
+        //creates a Mat object filled with zeros
+        Mat letter_image = Mat::zeros(200, 200, CV_8UC3);
+        char lastExecLetter = 0; // last letter sent to doSystemCalls()
+
+        while (true)
+        {
+            unique_lock<mutex> locker(mtx);
+            cond.wait(locker, [this]() {return signReady;});
             cout << "\nThread #5: Display output\n";
 
             letterCount %= NUM_LAST_LETTERS;         // Show majority of last letters captured
@@ -304,14 +308,11 @@ void Predict::f5_displayletter()
 
             //********************************//
             cout << "\nThread #5 exeuted...\n";
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
-            displayReady == true;
+            displayReady = true;
+            cond.notify_one();
         }
-
-        else signReady = false;
     }
-}
 
 // this function returns max distance between two vector points a and b 
 int Predict::distance_2(vector<Point> a, vector<Point> b)

@@ -4,17 +4,18 @@
 //defualt constructor
 Predict::Predict() {
 
-
 }
+
 
 // default destructor
 Predict::~Predict() {
 
     destroyAllWindows();
     capture.release();
+
 }
 
-//
+// this function loads the data images to learn the algorithm
 void Predict::asl_init()
 {
     int numframe = 0;
@@ -25,7 +26,9 @@ void Predict::asl_init()
     {
         char buffer[13 * sizeof(char)];
         sprintf_s(buffer, "train/%c.jpg", (char)('a' + i));
+
         Mat img1 = imread(buffer, 1);
+
         if (img1.data)
         {
             Mat img2;
@@ -43,9 +46,7 @@ void Predict::asl_init()
             letters[i] = contours[0];
         }
     }
-
-    //************Preload letter train images  ends*********//
-
+     //************Preload letter train images ends*********//
 
 
     //************learn starts**********************//
@@ -61,9 +62,12 @@ void Predict::f1_captureimage()
     Mat frame;
     capture = VideoCapture(0);
     // current frame
-    while (1)
+    while (true)
     {
-        printf("Thread #1: Capture Image\n\r");
+
+        cout << "Thread #1: Capture Image\n ";
+        
+
         // Create the capture object
         if (!capture.isOpened())
         {
@@ -85,20 +89,22 @@ void Predict::f1_captureimage()
 
         char q = waitKey(33);
 
-        printf("\nThread #1 exeuted...\n");
+        //********************************//
+        cout << "\nThread #1 exeuted...\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        
     }
     capture.release();
-    std::this_thread::sleep_for(std::chrono::seconds(10));
+
 }
 
 //this function extract the hand
 void Predict::f2_extracthand()
 {
-    while (1)
+    while (true)
     {
-        /*      Mat binary_image;*/
-        printf("Thread #2: Extract hand\n\r");
+        cout << "Thread #2: Extract hand\n";
+
 
         if (reset <= 10)
         {
@@ -109,10 +115,12 @@ void Predict::f2_extracthand()
         backGroundMOG2->apply(rgb_image, binary_image, 0);
 
         imshow("Binary Image", binary_image);
-        printf("\nThread #2 exeuted...\n");
+
+        //********************************//
+        cout << "\nThread #2 exeuted...\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
     }
-    std::this_thread::sleep_for(std::chrono::seconds(10));
 }
 
 //this function extracts the feature
@@ -123,7 +131,8 @@ void Predict::f3_extractfeature()
 
         Mat threshold_output; // Generate the tresholdoutput
 
-        printf("Thread #3: Extract Feature\n\r");
+        cout << "Thread #3: Extract Feature\n";
+
 
         threshold(binary_image, threshold_output, THRESH, 255, THRESH_BINARY); // Detect edges using Threshold
 
@@ -147,11 +156,13 @@ void Predict::f3_extractfeature()
 
         //printf("%d", maxIndex);  // Draw Largest Contours
         Scalar color = Scalar(0, 0, 255);
+
         //To draw the contours, cv::drawContours function is used
         drawContours(drawing, feature_image, maxIndex, Scalar(255, 255, 255), FILLED); // filled white
 
         // Draw Contours
         Mat contourImg = Mat::zeros(rgb_image.size(), CV_8UC3);
+
         drawContours(contourImg, feature_image, maxIndex, Scalar(0, 0, 255), 2, 8, hierarchy, 0, Point(0, 0));
 
         // Reset if too much noise
@@ -168,12 +179,11 @@ void Predict::f3_extractfeature()
         char q = waitKey(33);
 
 
-        //****
-        printf("\nThread #3 executed...\n");
+        //********************************//
+        cout << "\nThread #3 executed...\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
     }
-    std::this_thread::sleep_for(std::chrono::seconds(10));
 }
 
 //this fucntion identifies the letter
@@ -181,14 +191,17 @@ void Predict::f4_identifyletter()
 {
     while (true)
     {
-        printf("Thread #4: Identify letter\n\r");
+        cout << "\nThread #4: Identify letter\n";
 
-        // Compare to reference train
+        // Compare to reference train images 
         if (feature_image.size() > 0 && frames++ > SAMPLE_RATE && feature_image[maxIndex].size() >= 5)
         {
             RotatedRect testRect = fitEllipse(feature_image[maxIndex]);
+
             frames = 0;
+            
             double lowestDiff = HUGE_VAL;
+            
             for (int i = 0; i < MAX_LETTERS; i++)
             {
                 if (letters[i].size() == 0)
@@ -202,18 +215,25 @@ void Predict::f4_identifyletter()
                     asl_letter = 'a' + i;
                 }
             }
+
             if (lowestDiff > DIFF_THRESH)
             { // Dust
                 asl_letter = 0;
             }
+            
+
             cout << asl_letter << " | diff: " << lowestDiff << endl;
-            printf("| diff: %f \n\r", lowestDiff);
+
+            cout << "| diff: %f \n", lowestDiff;
         }
-        //************
-        printf("\nThread #4 exeuted... \n");
+
+
+        //********************************//
+        cout << "\nThread #4 exeuted... \n";
+
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
     }
-    std::this_thread::sleep_for(std::chrono::seconds(10));
 }
 
 //this fucntion displays the letter
@@ -226,9 +246,9 @@ void Predict::f5_displayletter()
     Mat letter_image = Mat::zeros(200, 200, CV_8UC3);
     char lastExecLetter = 0; // last letter sent to doSystemCalls()
 
-    while (1)
+    while (true)
     {
-        printf("Thread #5: Display output\n\r");
+        cout << "\nThread #5: Display output\n";
 
         letterCount %= NUM_LAST_LETTERS;         // Show majority of last letters captured
         lastLetters[letterCount++] = asl_letter; // input from f4
@@ -265,16 +285,16 @@ void Predict::f5_displayletter()
             if (maxChar != lastExecLetter)
             {
                 lastExecLetter = maxChar;
-                //doSystemCalls(maxChar);
             }
         }
-        imshow("Letter", letter_image); // output th5--> letter_image
+
+        imshow("Letter", letter_image); // output f5--> letter_image
         char q = waitKey(33);
 
-        printf("\nThread #5 exeuted...\n");
+        //********************************//
+        cout << "\nThread #5 exeuted...\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
-    this_thread::sleep_for(chrono::seconds(10));
 }
 
 // this function returns max distance between two vector points a and b 
@@ -314,19 +334,6 @@ double Predict::distance(vector<Point> a, vector<Point> b)
     return sqrt((double)maxDist);
 }
 
-////
-//void Predict::threads_run() {
-//    std::thread f1(&Predict::f1_captureimage);
-//    std::thread f2(&Predict::f2_extracthand);
-//    std::thread f3(&Predict::f3_extractfeature);
-//    std::thread f4(&Predict::f4_identifyletter);
-//    std::thread f5(&Predict::f5_displayletter);
-//    f1.join();
-//    f2.join();
-//    f3.join();
-//    f4.join();
-//    f5.join();
-//}
 
 //this function runs the application
 void Predict::run(char key) {
@@ -338,7 +345,7 @@ void Predict::run(char key) {
 
         while (key != KEY_ESC)
         {
-            printf("inside training \n\r ");
+            cout << "inside training \n";
             if (!capture.isOpened())
             {
                 // Error in opening the video input
@@ -349,7 +356,7 @@ void Predict::run(char key) {
             Mat frame;                                      // current frame
             Mat fgMaskMOG2;                                 // foreground mask foreground mask generated by MOG2 method
             Mat threshold_output;                           // Generate Convex Hull
-            vector<vector<Point>> contours;                 // local vector to store the points of the contours
+            vector<vector<Point>> contours;                 // Local vector to store the points of the contours
 
             if (!capture.read(frame))
             {
@@ -425,7 +432,7 @@ void Predict::run(char key) {
                 // save in memory
                 letters[key - 'a'] = contours[maxIndex];
 
-                // write to file
+                // write to folder
                 char buffer[13 * sizeof(char)];
                 sprintf_s(buffer, "train/%c.jpg", (char)key);
                 imwrite(buffer, drawing1);
@@ -443,32 +450,37 @@ void Predict::run(char key) {
 
 void  Predict::train() {
 
-    String folder1path = "./data/*.jpg";
+    String folder1 = "./data/*.jpg";
     String folder2 = "./train/*.jpg";
+
     vector<String> datafiles;
     vector<String> loadedfiles;
 
-    Mat loaded_img, data_img, dst;
+    Mat train_img, data_img, dst;
 
-    cv::glob(folder1path, datafiles);
+    cv::glob(folder1, datafiles);
     cv::glob(folder2, loadedfiles);
-
+    
     for (size_t i = 0; i < loadedfiles.size(); i++) {
-        
-        loaded_img = imread(loadedfiles[i], IMREAD_GRAYSCALE);
+
+        train_img = imread(loadedfiles[i], IMREAD_GRAYSCALE);
+
     }
+  
     for (size_t i = 0; i < datafiles.size(); i++)
     {
+
         data_img = imread(datafiles[i], IMREAD_GRAYSCALE);
-        
-        subtract(loaded_img, data_img, dst);
 
-        if (dst <= data_img) {
-
-        }
-
-        imshow("dst", dst);
-        //dst = loaded_img - data_img;
     }
 
+    subtract(train_img, data_img, dst);
+
+    if (dst.shape == data_img.shape) {
+
+    }
+
+    imshow("dst", dst);
+
+}
  }

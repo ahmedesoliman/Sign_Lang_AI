@@ -42,7 +42,7 @@ using namespace std;
 class Predict
 {
 private:
-	int frames = 0;
+	int frames = 0;                         // frames varaible to count how many frames processed
 	int maxIndex = 0;
 	int reset = 0;
 	
@@ -74,9 +74,9 @@ public:
 	void f3_extractfeature();			// this method should extract the 
 	void f4_identifyletter();			// this method should indentify the letter
 	void f5_displayletter();			// this method should display the letter
-	void asl_init();					// this method iniallized & preload letter images when started
-	int distance_2(vector<Point>, vector<Point>);		//this method 
-	double distance(vector<Point>, vector<Point>);		//this method
+	void asl_init();									// this method iniallized & preload letter images when started
+	int distance_2(vector<Point>, vector<Point>);		//this method take two vectors of points a and b
+	double distance(vector<Point>, vector<Point>);		//this method find the distance of 
 	void run(char);
 	void train();
 };

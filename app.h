@@ -44,7 +44,7 @@ using namespace std;
 #define SAMPLE_RATE 1
 
 
-class Predict
+class App
 {
 private:
 	std::mutex mtx;
@@ -82,8 +82,8 @@ private:
 
 
 public:
-	Predict();
-	~Predict();
+	App();
+	~App();
 	// member functions declarations
 	void f1_captureimage();				// this method should capture the image
 	void f2_extracthand();				//this method should extract the hand
@@ -93,7 +93,8 @@ public:
 	void asl_init();									// this method iniallized & preload letter images when started
 	int distance_2(vector<Point>, vector<Point>);		//this method take two vectors of points a and b
 	double distance(vector<Point>, vector<Point>);		//this method find the distance of 
-	void run(char);
+	void train(char);
+	void predict(char)
 	//void train();
 };
 

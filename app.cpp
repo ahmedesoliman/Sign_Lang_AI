@@ -1,12 +1,12 @@
-#include "predict.h"
+#include "app.h"
 
 //defualt constructor
-Predict::Predict()
+App::App()
 {
 }
 
 // default destructor
-Predict::~Predict()
+App::~App()
 {
 
     destroyAllWindows();
@@ -14,7 +14,7 @@ Predict::~Predict()
 }
 
 // this function loads the data images to learn the algorithm
-void Predict::asl_init()
+void App::asl_init()
 {
     //************Preload letter train images starts*********//
     for (int i = 0; i < MAX_LETTERS; i++)
@@ -27,11 +27,9 @@ void Predict::asl_init()
 
         if (img1.data)
         {
-            Mat img2;
+            Mat img2, threshold_output;;
 
             cvtColor(img1, img2, COLOR_RGB2GRAY);
-
-            Mat threshold_output;
 
             // Detect edges using Threshold
             //The threshold method returns two outputs. The first is the threshold that was used and the second output is the thresholded image.
@@ -42,7 +40,6 @@ void Predict::asl_init()
             findContours(threshold_output, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0));
 
             letters[i] = contours[0];
-
             //contours returns a vector<vector<point>>
         }
     }
@@ -56,7 +53,7 @@ void Predict::asl_init()
 }
 
 //this function capture the image
-void Predict::f1_captureimage()
+void App::f1_captureimage()
 {
 
     capture = VideoCapture(0);
@@ -100,7 +97,7 @@ void Predict::f1_captureimage()
 }
 
 //this function extract the hand
-void Predict::f2_extracthand()
+void App::f2_extracthand()
 {
     while (true)
     {
@@ -133,7 +130,7 @@ void Predict::f2_extracthand()
 }
 
 //this function extracts the feature
-void Predict::f3_extractfeature()
+void App::f3_extractfeature()
 {
     while (true)
     {
@@ -195,7 +192,7 @@ void Predict::f3_extractfeature()
 }
 
 //this fucntion identifies the letter
-void Predict::f4_identifyletter()
+void App::f4_identifyletter()
 {
     while (true)
     {
@@ -243,7 +240,7 @@ void Predict::f4_identifyletter()
 }
 
 //this fucntion displays the letter
-void Predict::f5_displayletter()
+void App::f5_displayletter()
 {
 
     unique_lock<mutex> locker(mtx);
@@ -311,8 +308,8 @@ void Predict::f5_displayletter()
     }
 }
 
-//this function runs the application
-void Predict::run(char key)
+//this function trains the application
+void App::train(char key)
 {
 
     capture = VideoCapture(0);
@@ -355,9 +352,158 @@ void Predict::run(char key)
         findContours(threshold_output, feature_image, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0));
 
         // Find largest contour
+        
         Mat drawing1 = Mat::zeros(cropFrame.size(), CV_8UC3); // empty matrix to draw the contours on it - intialize it to Mat::zeros means all black
         double largest_area = 0;
-        int maxIndex = 0;
+
+        for (int j = 0; j < feature_image.size(); j++)
+        {
+            double area = contourArea(feature_image[j], false); // Find the area of the contour
+            if (area > largest_area)
+            {
+                largest_area = area;
+                maxIndex = j; // Store the index of largest contour
+            }
+        }
+
+        // Draw Largest Contours
+        Scalar color = Scalar(0, 0, 255);
+        drawContours(drawing1, feature_image, maxIndex, Scalar(255, 255, 255), FILLED); // fill white
+
+        // Draw Contours
+        Mat contourImg = Mat::zeros(cropFrame.size(), CV_8UC3);
+        drawContours(contourImg, feature_image, maxIndex, Scalar(0, 0, 255), 2, 8, hierarchy, 0, Point(0, 0));
+
+        //Reset if too much noise
+        /*           Scalar sums = sum(drawing1);
+               int s = sums[0] + sums[1] + sums[2] + sums[3];
+               if (s >= RESET_THRESH)
+               {
+                   backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+                   continue;
+               }*/
+
+       // Show the current frame and the foreground masks
+        imshow("Crop Frame", cropFrame);
+        imshow("Mask", drawing1);
+        imshow("Foregound Mask", fgMaskMOG2);
+        imshow("Contour image", contourImg);
+      
+
+        //if (contourImg.rows > 0)
+        //    imshow("Contour", contourImg);
+
+        key = waitKey(1);
+
+        if (key >= 'a' && key <= 'z')
+        {
+            cout << "Wrote letter '" << (char)key << '\'' << endl;
+
+            // save in memory
+            letters[key - 'a'] = contours[maxIndex];
+
+            // write to folder
+            char buffer[13 * sizeof(char)];
+            sprintf_s(buffer, "train/%c.jpg", (char)key);
+            imwrite(buffer, drawing1);
+        }
+
+        // Manual reset the keyboard
+        if (key == ' ')
+            backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+
+    }
+
+    // Delete capture object
+    destroyAllWindows(); // destroy the all open windows
+    capture.release();   // Delete capture object
+}
+
+// this function returns max distance between two vector points a and b
+int App::distance_2(vector<Point> a, vector<Point> b)
+{
+    int maxDist = 0;
+    for (int i = 0; i < a.size(); i++)
+    {
+        int min = 1000000;
+        for (int j = 0; j < b.size(); j++)
+        {
+            int dx = (a[i].x - b[j].x);
+
+            int dy = (a[i].y - b[j].y);
+
+            int tmpDist = dx * dx + dy * dy;
+
+            if (tmpDist < min)
+            {
+                min = tmpDist;
+            }
+
+            if (tmpDist == 0)
+            {
+                break; // can't get better than equal.
+            }
+        }
+        maxDist += min;
+    }
+    return maxDist;
+}
+
+//
+double App::distance(vector<Point> a, vector<Point> b)
+{
+    int maxDistAB = distance_2(a, b);
+    int maxDistBA = distance_2(b, a);
+    int maxDist = max(maxDistAB, maxDistBA);
+
+    return sqrt((double)maxDist);
+}
+
+void App::predict(char key) {
+
+    capture = VideoCapture(0);
+
+    //Creates MOG2 Background Subtractor.
+    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+
+    while (key != KEY_ESC)
+    {
+        /*    cout << "inside training \n";*/
+        if (!capture.isOpened())
+        {
+            // Error in opening the video input
+            cout << "Cannot Open Webcam... " << endl;
+            exit(EXIT_FAILURE);
+        }
+
+        Mat fgMaskMOG2; // foreground mask foreground mask generated by MOG2 method
+
+        if (!capture.read(frame))
+        {
+            cout << "Unable to read next frame." << endl;
+            cout << "Exiting..." << endl;
+            exit(EXIT_FAILURE);
+        }
+
+        // Crop Frame to smaller region using the rectangle of interest method
+        Rect myROI(200, 200, 200, 200);
+
+        Mat cropFrame = frame(myROI);
+
+        // Update the background model
+        backGroundMOG2->apply(cropFrame, fgMaskMOG2, 0);
+
+        // Detect edges using Threshold
+        /*adaptiveThreshold(fgMaskMOG2, threshold_output, THRESH, ADAPTIVE_THRESH_MEAN_C, THRESH_BINARY, 3, 0);  -- adabtiveThreshhold can be another method to be used*/
+        threshold(fgMaskMOG2, threshold_output, THRESH, 255, THRESH_BINARY);
+
+        // Find contours
+        findContours(threshold_output, feature_image, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0));
+
+        // Find largest contour
+
+        Mat drawing1 = Mat::zeros(cropFrame.size(), CV_8UC3); // empty matrix to draw the contours on it - intialize it to Mat::zeros means all black
+        double largest_area = 0;
 
         for (int j = 0; j < feature_image.size(); j++)
         {
@@ -392,23 +538,11 @@ void Predict::run(char key)
         imshow("Foregound Mask", fgMaskMOG2);
         imshow("Contour image", contourImg);
 
+
         //if (contourImg.rows > 0)
         //    imshow("Contour", contourImg);
 
         key = waitKey(1);
-
-        if (key >= 'a' && key <= 'z')
-        {
-            cout << "Wrote letter '" << (char)key << '\'' << endl;
-
-            // save in memory
-            letters[key - 'a'] = contours[maxIndex];
-
-            // write to folder
-            char buffer[13 * sizeof(char)];
-            sprintf_s(buffer, "train/%c.jpg", (char)key);
-            imwrite(buffer, drawing1);
-        }
 
         // Manual reset the keyboard
         if (key == ' ')
@@ -452,44 +586,4 @@ void Predict::run(char key)
     // Delete capture object
     destroyAllWindows(); // destroy the all open windows
     capture.release();   // Delete capture object
-}
-
-// this function returns max distance between two vector points a and b
-int Predict::distance_2(vector<Point> a, vector<Point> b)
-{
-    int maxDist = 0;
-    for (int i = 0; i < a.size(); i++)
-    {
-        int min = 1000000;
-        for (int j = 0; j < b.size(); j++)
-        {
-            int dx = (a[i].x - b[j].x);
-
-            int dy = (a[i].y - b[j].y);
-
-            int tmpDist = dx * dx + dy * dy;
-
-            if (tmpDist < min)
-            {
-                min = tmpDist;
-            }
-
-            if (tmpDist == 0)
-            {
-                break; // can't get better than equal.
-            }
-        }
-        maxDist += min;
-    }
-    return maxDist;
-}
-
-//
-double Predict::distance(vector<Point> a, vector<Point> b)
-{
-    int maxDistAB = distance_2(a, b);
-    int maxDistBA = distance_2(b, a);
-    int maxDist = max(maxDistAB, maxDistBA);
-
-    return sqrt((double)maxDist);
 }

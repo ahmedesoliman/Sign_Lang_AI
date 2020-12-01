@@ -1,4 +1,4 @@
-#include "predict.h"
+#include "app.h"
 #include <thread>
 
 
@@ -8,7 +8,7 @@ using namespace std;
 
 int main()
 {
-    Predict predict;             //predict object
+    App app;             //predict object
    ///* predict.run();  */       //run app
 
     char keyboard = 0;           // last key pressed
@@ -17,7 +17,9 @@ int main()
 
     int debug_mode = 0;         // 0= no debug; 1= debug
 
-    cout << "Press (T) to train or (D) to Debug: ";
+    int predict_mode = 0        // 0= no predict; 1=predict
+
+    cout << "Press (T) to train - (P) to predict or (D) to Debug: ";
 
     cin >> keyboard;
 
@@ -30,31 +32,40 @@ int main()
         debug_mode = 1;
     }
 
+    if (keyboard == 'P' || keyboard == 'd') {
+        
+        predict_mode = 1;
+    }
+
     if (training_mode)
     {
-        predict.asl_init();
-        predict.run(keyboard);
+        app.asl_init();
+        app.train(keyboard);
 
     }
 
+    if (predict_mode) {
+        app.asl_init();
+        app.predict(keyboard);
+    }
     if (debug_mode) {
 
         //predict.train();
-        predict.asl_init();
+        app.asl_init();
 
-        std::thread t1(&Predict::f1_captureimage, &predict);
-
-
-        std::thread t2(&Predict::f2_extracthand, &predict);
+        std::thread t1(&App::f1_captureimage, &app);
 
 
-        std::thread t3(&Predict::f3_extractfeature, &predict);
+        std::thread t2(&App::f2_extracthand, &app);
 
 
-        std::thread t4(&Predict::f4_identifyletter, &predict);
+        std::thread t3(&App::f3_extractfeature, &app);
+
+
+        std::thread t4(&App::f4_identifyletter, &app);
     
 
-        std::thread t5(&Predict::f5_displayletter, &predict);
+        std::thread t5(&App::f5_displayletter, &app);
 
         t1.join();
         t2.join();

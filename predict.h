@@ -56,7 +56,7 @@ private:
 	bool signReady;
 	bool displayReady;
 
-
+	char asl_letter;						// output f4--> asl_letter
 	int frames = 0;                         // frames varaible to count how many frames processed
 	int maxIndex = 0;
 	int reset = 0;
@@ -71,8 +71,6 @@ private:
 	//this is 2D vector like matrix on OpenCV
 	vector<vector<Point>> feature_image;	// output f3--> feature_image
 	vector<vector<Point>> contours;			// returns a vector<vector<Point>>
-
-	char asl_letter;						// output f4--> asl_letter
 
 	VideoCapture capture;					// openCV Class for video capturing from video files, image sequences or cameras
 

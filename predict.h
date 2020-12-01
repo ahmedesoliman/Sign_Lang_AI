@@ -65,6 +65,7 @@ private:
 	Mat rgb_image;                          // output f1--> rgb_imge
 	Mat binary_image;
 	Mat drawing;							// output f2--> binary_image
+	Mat threshold_output;					// Generate the tresholdoutput
 
 	vector<vector<Point>> feature_image;	// output f3--> feature_image
 

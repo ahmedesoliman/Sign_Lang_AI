@@ -1,4 +1,7 @@
 #include "app.h"
+#include "predict.h"
+#include "train.h"
+
 #include <thread>
 
 
@@ -8,8 +11,10 @@ using namespace std;
 
 int main()
 {
-    App app;             //predict object
-   ///* predict.run();  */       //run app
+    App app;                        //App object
+    Predict predict;                //predict object
+    Train train;                    //train object
+
 
     char keyboard = 0;           // last key pressed
 
@@ -40,13 +45,13 @@ int main()
     if (training_mode)
     {
         app.asl_init();
-        app.train(keyboard);
+        train.trainApp(keyboard);
 
     }
 
     if (predict_mode) {
         app.asl_init();
-        app.predict(keyboard);
+        predict.predictApp(keyboard);
     }
     if (debug_mode) {
 

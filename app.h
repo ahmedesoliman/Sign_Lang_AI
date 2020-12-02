@@ -1,5 +1,5 @@
-#ifndef PREDICT_H
-#define PREDICT_H
+#ifndef APP_H
+#define APP_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,7 +46,7 @@ using namespace std;
 
 class App
 {
-private:
+protected:
 	std::mutex mtx;
 	std::condition_variable cond;
 

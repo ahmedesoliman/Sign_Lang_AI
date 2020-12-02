@@ -147,6 +147,7 @@ void Predict::predictApp(char key) {
 }
 
 void Predict::displayLetter() {
+
     int letterCount = 0;                    // number of letters captured since last display
     char lastLetters[NUM_LAST_LETTERS] = { 0 };
 
@@ -201,6 +202,6 @@ void Predict::displayLetter() {
         char q = waitKey(33);
 
         //********************************//
-        cout << "\nDisplay letter exeuted...\n";
+ /*       cout << "\nDisplay letter exeuted...\n";*/
 
  }

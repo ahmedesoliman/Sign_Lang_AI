@@ -135,7 +135,7 @@ void Predict::predictApp(char key) {
             }
 
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
-
+            displayLetter();
         }
     }
 
@@ -143,3 +143,62 @@ void Predict::predictApp(char key) {
     destroyAllWindows(); // destroy the all open windows
     capture.release();   // Delete capture object
 }
+
+void Predict::displayLetter() {
+    int letterCount = 0;                    // number of letters captured since last display
+    char lastLetters[NUM_LAST_LETTERS] = { 0 };
+
+    //creates a Mat object filled with zeros
+    Mat letter_image = Mat::zeros(200, 200, CV_8UC3);
+    char lastExecLetter = 0;                // last letter sent
+
+  
+
+        //cout << "\nThread #5: Display output\n";
+
+        letterCount %= NUM_LAST_LETTERS;         // Show majority of last letters captured
+        lastLetters[letterCount++] = asl_letter; // input from f4
+        letter_image = Mat::zeros(200, 200, CV_8UC3);
+
+        int counts[MAX_LETTERS + 1] = { 0 };
+
+        for (int i = 0; i < NUM_LAST_LETTERS; i++)
+            counts[lastLetters[i] + 1 - 'a']++;
+
+        int maxCount = 0;
+        char maxChar = 0;
+        for (int i = 0; i < MAX_LETTERS + 1; i++)
+        {
+            if (counts[i] > maxCount)
+            {
+                maxCount = counts[i];
+                maxChar = i;
+            }
+        }
+
+        if (maxChar && maxCount >= MIN_FREQ)
+        {
+            maxChar = maxChar - 1 + 'a';
+            char buffer[2 * sizeof(char)];
+            sprintf_s(buffer, "%c", maxChar);
+
+            putText(letter_image, buffer, Point(10, 75), FONT_HERSHEY_SIMPLEX, 12, Scalar(255, 255, 255), 1, 1);
+
+            vector<vector<Point>> dummy;
+
+            dummy.push_back(letters[maxChar - 'a']);
+
+            drawContours(letter_image, dummy, 0, Scalar(255, 0, 0), 2, 8, hierarchy, 0, Point(0, 0));
+            if (maxChar != lastExecLetter)
+            {
+                lastExecLetter = maxChar;
+            }
+        }
+
+        imshow("Letter", letter_image); // output f5--> letter_image
+        char q = waitKey(33);
+
+        //********************************//
+        cout << "\nDisplay letter exeuted...\n";
+
+ }

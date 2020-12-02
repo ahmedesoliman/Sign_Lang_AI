@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef APP_H
 #define APP_H
 
@@ -27,7 +29,6 @@
 #include <mutex>
 
 #include <condition_variable>
-
 
 
 using namespace cv;
@@ -84,18 +85,17 @@ protected:
 public:
 	App();
 	~App();
+
 	// member functions declarations
 	void f1_captureimage();				// this method should capture the image
 	void f2_extracthand();				//this method should extract the hand
-	void f3_extractfeature();			// this method should extract the 
+	void f3_extractfeature();			// this method should extract the feature from the images (featuers are like curves, circels, or edges)
 	void f4_identifyletter();			// this method should indentify the letter
 	void f5_displayletter();			// this method should display the letter
-	void asl_init();									// this method iniallized & preload letter images when started
+	void asl_init();									// this method iniallized & preload letter images when the app is started
 	int distance_2(vector<Point>, vector<Point>);		//this method take two vectors of points a and b
 	double distance(vector<Point>, vector<Point>);		//this method find the distance of 
-	void train(char);
-	void predict(char);
-	//void train();
+	void run();							//this method should run the app
 };
 
 #endif // PREDICT_H

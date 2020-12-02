@@ -12,6 +12,7 @@ public:
 	Predict();
 	~Predict();
 	void predictApp(char);
+	void displayLetter();
 
 };
 

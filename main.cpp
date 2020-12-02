@@ -15,7 +15,6 @@ int main()
     Predict predict;                //predict object
     Train train;                    //train object
 
-
     char keyboard = 0;           // last key pressed
 
     int training_mode = 0;       // 0 = no training; 1 = training
@@ -38,7 +37,7 @@ int main()
     }
 
     if (keyboard == 'P' || keyboard == 'p') {
-        
+
         predict_mode = 1;
     }
 
@@ -68,7 +67,7 @@ int main()
 
 
         std::thread t4(&App::f4_identifyletter, &app);
-    
+
 
         std::thread t5(&App::f5_displayletter, &app);
 

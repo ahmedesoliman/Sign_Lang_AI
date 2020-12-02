@@ -16,7 +16,7 @@ App::~App()
 // this function loads the data images to learn the algorithm
 void App::asl_init()
 {
-    //************Preload letter train images starts*********//
+    //*** Preload letter train images starts ***//
     for (int i = 0; i < MAX_LETTERS; i++)
     {
         char buffer[13 * sizeof(char)];

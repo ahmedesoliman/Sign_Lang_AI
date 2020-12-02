@@ -1,3 +1,4 @@
+//app.h
 #pragma once
 
 #ifndef APP_H
@@ -98,4 +99,4 @@ public:
 	void run();							//this method should run the app
 };
 
-#endif // PREDICT_H
+#endif // end of APP_H

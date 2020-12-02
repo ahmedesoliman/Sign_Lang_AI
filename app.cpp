@@ -1,3 +1,4 @@
+// app.cpp
 #include "app.h"
 
 //defualt constructor
@@ -50,7 +51,7 @@ void App::asl_init()
     backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
 
     //***learn ends  ***//
-}
+} /* end of asl_init()*/
 
 //this function capture the image
 void App::f1_captureimage()
@@ -94,7 +95,7 @@ void App::f1_captureimage()
         cond.notify_one();
     }
     capture.release();
-}
+} /* end of f1_captureimage()*/
 
 //this function extract the hand
 void App::f2_extracthand()
@@ -127,7 +128,7 @@ void App::f2_extracthand()
         handReady = true;
         cond.notify_one(); //Unblocks one of the threads currently waiting for this condition. If no threads are waiting, the function does nothing. If more than one, it is unspecified which of the threads is selected.
     }
-}
+} /* end of f2_extracthand()*/
 
 //this function extracts the feature
 void App::f3_extractfeature()
@@ -189,7 +190,7 @@ void App::f3_extractfeature()
         featureReady = true;
         cond.notify_one();
     }
-}
+}  /* end of f3_extractfeature()*/
 
 //this fucntion identifies the letter
 void App::f4_identifyletter()
@@ -237,7 +238,7 @@ void App::f4_identifyletter()
         signReady = true;
         cond.notify_one();
     }
-}
+} /* end of f4_identifyletter()*/
 
 //this fucntion displays the letter
 void App::f5_displayletter()
@@ -306,7 +307,7 @@ void App::f5_displayletter()
         displayReady = true;
         cond.notify_one();
     }
-}
+} /* end of f5_displayletter()*/
 
 // this function returns max distance between two vector points a and b
 int App::distance_2(vector<Point> a, vector<Point> b)
@@ -336,7 +337,7 @@ int App::distance_2(vector<Point> a, vector<Point> b)
         maxDist += min;
     }
     return maxDist;
-}
+} /* end of distance_2()*/
 
 //
 double App::distance(vector<Point> a, vector<Point> b)
@@ -346,7 +347,7 @@ double App::distance(vector<Point> a, vector<Point> b)
     int maxDist = max(maxDistAB, maxDistBA);
 
     return sqrt((double)maxDist);
-}
+} /* end of distance()*/
 
 void App::run() {
 

@@ -1,3 +1,15 @@
+/************* 
+
+Final Project
+Name: Ahmed Soliman
+ID# : 24033795
+Class : Fall 2020, CSC 211H 0500[64041] - (Borough of Manhattan CC)
+Date : 12 / 15 / 2020
+Time : 05 : 30PM
+Instructor Name : Dr.Azhar
+
+*************/
+
 #include "app.h"
 #include "predict.h"
 #include "train.h"

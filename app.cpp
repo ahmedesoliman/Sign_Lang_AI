@@ -533,10 +533,12 @@ void App::predict(char key) {
                }*/
 
                // Show the current frame and the foreground masks
+        Mat guide;
         imshow("Crop Frame", cropFrame);
         imshow("Mask", drawing1);
         imshow("Foregound Mask", fgMaskMOG2);
         imshow("Contour image", contourImg);
+        //imshow("./images/Sign_Lang.png", guide);
 
 
         //if (contourImg.rows > 0)

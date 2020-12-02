@@ -43,13 +43,13 @@ void App::asl_init()
             //contours returns a vector<vector<point>>
         }
     }
-    //************Preload letter train images ends*********//
+    //***Preload letter train images ends***//
 
-    //************learn starts**********************//
+    //*** learn starts ***//
 
     backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
 
-    //************learn ends  **********************//
+    //***learn ends  ***//
 }
 
 //this function capture the image

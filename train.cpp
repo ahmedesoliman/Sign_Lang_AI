@@ -101,14 +101,16 @@ void Train::trainApp(char key) {
 
         if (key >= 'a' && key <= 'z')
         {
-            cout << "Wrote letter '" << (char)key << '\'' << endl;
+            cout << "Wrote letter '" << key << '\'' << endl;
 
-            // save in memory
-            letters[key - 'a'] = contours[maxIndex];
+            int keyIndex = 0 + key - 'a';
+            //// save in memory
+            letters[keyIndex] = feature_image[maxIndex];
 
             // write to folder
             char buffer[13 * sizeof(char)];
-            sprintf_s(buffer, "./train/%c.jpg", (char)key);
+
+            sprintf_s(buffer, "train/%c.jpg", key); // foramting
             imwrite(buffer, drawing1);
         }
 
@@ -119,6 +121,6 @@ void Train::trainApp(char key) {
     }
 
     // Delete capture object
-    destroyAllWindows(); // destroy the all open windows
-    capture.release();   // Delete capture object
+    //destroyAllWindows(); // destroy the all open windows
+    //capture.release();   // Delete capture object
 }

@@ -140,9 +140,9 @@ void Predict::predictApp(char key) {
         }
     }
 
-    // Delete capture object
-    destroyAllWindows(); // destroy the all open windows
-    capture.release();   // Delete capture object
+    //// Delete capture object
+    //destroyAllWindows(); // destroy the all open windows
+    //capture.release();   // Delete capture object
 }
 
 void Predict::displayLetter() {

@@ -3,11 +3,9 @@
 
 //default constructor
 Train::Train() {
-
 }
 
 //default destructor
-
 Train::~Train() {
 
     destroyAllWindows(); // destroy the all open windows
@@ -105,12 +103,12 @@ void Train::trainApp(char key) {
 
             int keyIndex = 0 + key - 'a';
             //// save in memory
-            letters[keyIndex] = feature_image[maxIndex];
+            letters[keyIndex] = contours[maxIndex];
 
             // write to folder
             char buffer[13 * sizeof(char)];
 
-            sprintf_s(buffer, "train/%c.jpg", key); // foramting
+            sprintf_s(buffer, "train/%c.png", key); // foramting
             imwrite(buffer, drawing1);
         }
 

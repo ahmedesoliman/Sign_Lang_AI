@@ -74,6 +74,8 @@ One of the most important objectives of the model is to decrease the communicati
 
 # Future Scope
 
-Future enhancement if the system can be done through developing a system that ca detect the hand gesture in real time with a more acurate mesusres. The system can interpret words and stores it in a database or a text file which later can be used to create snectences. The system can also be integrated into other operating systems or devices which will help to convert sign languge to text.
+- Future enhancement of the system can be done through enhancing the system that can detect the hand gesture in real time with a more acurate mesusres.
+- The system can interpret words and stores it in a database or a text file which later can be used to create snectences. The system can also be integrated into other operating systems or devices which will help to convert sign languge to text.
+- This project was developed was a limited knowledge of C++ and openCV. Bu there is unlimetied opprtunities to make it better.
 
-### AHMED SOLIMAN
+#### COPYRIGHTS -> AHMED SOLIMAN

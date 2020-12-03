@@ -62,8 +62,8 @@ protected:
 
 	char asl_letter;						// output f4--> asl_letter
 	int frames = 0;                         // frames varaible to count how many frames processed
-	int maxIndex = 0;
-	int reset = 0;
+	int maxIndex = 0;						//			
+	int reset = 0;							// to reset the backgorund substraction if there is too much noise
 	
 	// Private members 
 	Mat frame;                              // current frame

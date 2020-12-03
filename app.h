@@ -48,7 +48,9 @@ using namespace std;
 
 class App
 {
+
 protected:
+
 	std::mutex mtx;
 	std::condition_variable cond;
 

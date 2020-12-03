@@ -87,7 +87,7 @@ void Train::trainApp(char key) {
                    continue;
                }*/
 
-               // Show the current frame and the foreground masks
+        // Show the current frame and the foreground masks
         imshow("Crop Frame", cropFrame);
         imshow("Mask", drawing1);
         imshow("Foregound Mask", fgMaskMOG2);
@@ -108,7 +108,7 @@ void Train::trainApp(char key) {
 
             // write to folder
             char buffer[13 * sizeof(char)];
-            sprintf_s(buffer, "train/%c.jpg", (char)key);
+            sprintf_s(buffer, "./train/%c.jpg", (char)key);
             imwrite(buffer, drawing1);
         }
 

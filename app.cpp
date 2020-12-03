@@ -22,7 +22,7 @@ void App::asl_init()
     {
         char buffer[13 * sizeof(char)];
 
-        sprintf_s(buffer, "train/%c.jpg", (char)('a' + i));
+        sprintf_s(buffer, "data/%c.jpg", (char)('a' + i));
 
         Mat img1 = imread(buffer, 1);
 

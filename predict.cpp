@@ -104,7 +104,7 @@ void Predict::predictApp(char key) {
             if (area > largest_area)
             {
                 largest_area = area;
-                maxIndex = j; // Store the index of largest contour
+                maxIndex = j;   // Store the index of largest contour
             }
         }
 
@@ -125,8 +125,8 @@ void Predict::predictApp(char key) {
                    continue;
                }*/
 
-               // Show the current frame and the foreground masks
-
+       
+        // Show the current frame and the foreground masks
         imshow("Crop Frame", cropFrame);
         imshow("Mask", drawing1);
         imshow("Foregound Mask", fgMaskMOG2);

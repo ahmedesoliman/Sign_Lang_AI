@@ -18,5 +18,4 @@ public:
 };
 
 
-
 #endif // end of TRAIN_H

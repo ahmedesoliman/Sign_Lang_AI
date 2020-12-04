@@ -349,6 +349,7 @@ double App::distance(vector<Point> a, vector<Point> b)
     return sqrt((double)maxDist);
 } /* end of distance()*/
 
+
 void App::run(char key) {
     capture = VideoCapture(0);
 

@@ -51,6 +51,7 @@ One of the most important objectives of the model is to decrease the communicati
 - the frames should be captured at a rate of 30fps
 - No image corruption should happen
 - A new image should be captured once the system has processed and extraceted the sign from the previous image.
+
 # Train
 - Images should be saved as png images for the distance function to work
 - The system should have a feature to allow new users to train the letters.
@@ -71,10 +72,6 @@ One of the most important objectives of the model is to decrease the communicati
 - Green: 0, 255, 0
 - Yellow: 255, 255, 0
 - Blue: 0, 0, 255
-
-# Traning
-
-
 
 # Future Scope
 

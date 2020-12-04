@@ -173,7 +173,6 @@ void Predict::predictApp(char key) {
             }
 
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
-            displayLetter();
         }
     }
 

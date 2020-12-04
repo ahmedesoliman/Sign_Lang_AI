@@ -171,8 +171,12 @@ void Predict::predictApp(char key) {
             { // Dust
                 asl_letter = 0;
             }
-
+            ofstream myfile;
+            myfile.open("output.txt", ios::out | ios::app);
+            myfile << asl_letter;
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
+            cout << "Writing the letter: " << asl_letter << " -> to a file.\n";
+            myfile.close();
         }
     }
 

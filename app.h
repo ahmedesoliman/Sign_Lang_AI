@@ -4,6 +4,7 @@
 #ifndef APP_H
 #define APP_H
 
+#include <fstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>

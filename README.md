@@ -55,6 +55,8 @@ One of the most important objectives of the model is to decrease the communicati
 # Detection
 
 - Image should be converted into grayscale image and hand should be detected using contour analysis and extraction.
+- System is better to be trained before extraction and detection.
+- 
 - Runing the system in real time using std::threads.
 
 # Threshold

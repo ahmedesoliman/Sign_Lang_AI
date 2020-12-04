@@ -62,33 +62,34 @@ int main(int argc, char** argv)
         }
 
         if (predict_mode) {
-            app.asl_init();
+            predict.load_ASL();
             predict.predictApp(keyboard);
         }
         if (debug_mode) {
 
             //predict.train();
             app.asl_init();
+            app.run(keyboard);
 
-            std::thread t1(&App::f1_captureimage, &app);
-
-
-            std::thread t2(&App::f2_extracthand, &app);
+            //std::thread t1(&App::f1_captureimage, &app);
 
 
-            std::thread t3(&App::f3_extractfeature, &app);
+            //std::thread t2(&App::f2_extracthand, &app);
 
 
-            std::thread t4(&App::f4_identifyletter, &app);
+            //std::thread t3(&App::f3_extractfeature, &app);
 
 
-            std::thread t5(&App::f5_displayletter, &app);
+            //std::thread t4(&App::f4_identifyletter, &app);
 
-            t1.join();
-            t2.join();
-            t3.join();
-            t4.join();
-            t5.join();
+
+            //std::thread t5(&App::f5_displayletter, &app);
+
+            //t1.join();
+            //t2.join();
+            //t3.join();
+            //t4.join();
+            //t5.join();
 
             //predict.train();
         }

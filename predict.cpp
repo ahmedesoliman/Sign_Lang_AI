@@ -15,6 +15,43 @@ Predict::~Predict() {
     capture.release();   // Delete capture object
 }
 
+void Predict::load_ASL()
+{
+    //*** Preload letter train images starts ***//
+    for (int i = 0; i < MAX_LETTERS; i++)
+    {
+        char buffer[13 * sizeof(char)];
+
+        sprintf_s(buffer, "data/%c.png", ('a' + i));  // foramting
+
+        Mat img1 = imread(buffer, 1);
+
+        if (img1.data)
+        {
+            Mat img2, threshold_output;;
+
+            cvtColor(img1, img2, COLOR_RGB2GRAY);
+
+            // Detect edges using Threshold
+            //The threshold method returns two outputs. The first is the threshold that was used and the second output is the thresholded image.
+            threshold(img2, threshold_output, THRESH, 255, THRESH_BINARY);
+
+            //findcontours() function retrieves contours from the binary image using the openCV algorithm[193].
+            //The contours are a useful tool for shape analysisand object and detectionand recognition.
+            findContours(threshold_output, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point(0, 0));
+
+            letters[i] = contours[0];
+            //contours returns a vector<vector<point>>
+        }
+    }
+    //***Preload letter train images ends***//
+
+    //*** learn starts ***//
+
+    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+
+    //***learn ends  ***//
+} /* end of asl_init()*/
 void Predict::predictApp(char key) {
 
     capture = VideoCapture(0);
@@ -136,7 +173,7 @@ void Predict::predictApp(char key) {
             }
 
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
-   /*         displayLetter();*/
+            displayLetter();
         }
     }
 

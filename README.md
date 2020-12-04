@@ -51,13 +51,17 @@ One of the most important objectives of the model is to decrease the communicati
 - the frames should be captured at a rate of 30fps
 - No image corruption should happen
 - A new image should be captured once the system has processed and extraceted the sign from the previous image.
+# Train
+- Images should be saved as png images for the distance function to work
+- The system should have a feature to allow new users to train the letters.
+- There should be no overwriting of a letter refrence image with another letter during traning.
+- The images should be stored in a subfolder/dataset for maintainance.
 
 # Detection
 
 - Image should be converted into grayscale image and hand should be detected using contour analysis and extraction.
 - System is better to be trained before extraction and detection.
-- 
-- Runing the system in real time using std::threads.
+- Runing the system in real time using C++ classes std::threads.
 
 # Threshold
 
@@ -70,9 +74,7 @@ One of the most important objectives of the model is to decrease the communicati
 
 # Traning
 
-- The system should have a feature to allow new users to train the letters.
-- There should be no overwriting of a letter refrence image with another letter during traning.
-- The images should be stored in a subfolder/dataset for maintainance.
+
 
 # Future Scope
 

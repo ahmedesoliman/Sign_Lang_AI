@@ -98,7 +98,7 @@ public:
 	void asl_init();									// this method iniallized & preload letter images when the app is started
 	int distance_2(vector<Point>, vector<Point>);		//this method take two vectors of points a and b
 	double distance(vector<Point>, vector<Point>);		//this method find the distance of 
-	void run();							//this method should run the app
+	void run(char);										//this method should run the test app
 };
 
 #endif // end of APP_H

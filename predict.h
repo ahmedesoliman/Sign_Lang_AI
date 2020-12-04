@@ -14,6 +14,7 @@ public:
 	~Predict();
 	void predictApp(char);
 	void displayLetter();
+	void load_ASL();
 
 };
 

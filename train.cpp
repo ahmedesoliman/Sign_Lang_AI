@@ -70,11 +70,11 @@ void Train::trainApp(char key) {
 
         // Draw Largest Contours
         Scalar color = Scalar(0, 0, 255);
-        drawContours(drawing1, feature_image, maxIndex, Scalar(255, 255, 255), FILLED); // fill white
+        drawContours(drawing1, feature_image, maxIndex, WHITE, FILLED); // fill white
 
         // Draw Contours
         Mat contourImg = Mat::zeros(cropFrame.size(), CV_8UC3);
-        drawContours(contourImg, feature_image, maxIndex, Scalar(0, 0, 255), 2, 8, hierarchy, 0, Point(0, 0));
+        drawContours(contourImg, feature_image, maxIndex, RED, 2, 8, hierarchy, 0, Point(0, 0)); // Draw RED
 
         //Reset if too much noise
         /*           Scalar sums = sum(drawing1);
@@ -102,8 +102,9 @@ void Train::trainApp(char key) {
             cout << "Wrote letter '" << key << '\'' << endl;
 
             int keyIndex = 0 + key - 'a';
-            //// save in memory
-            letters[keyIndex] = contours[maxIndex];
+
+            // save in memory
+ /*           letters[keyIndex] = contours[maxIndex];*/
 
             // write to folder
             char buffer[13 * sizeof(char)];
@@ -117,8 +118,4 @@ void Train::trainApp(char key) {
             backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
 
     }
-
-    // Delete capture object
-    //destroyAllWindows(); // destroy the all open windows
-    //capture.release();   // Delete capture object
 }

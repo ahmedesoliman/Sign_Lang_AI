@@ -51,7 +51,9 @@ void Predict::load_ASL()
     backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
 
     //***learn ends  ***//
+
 } /* end of asl_init()*/
+
 void Predict::predictApp(char key) {
 
     capture = VideoCapture(0);
@@ -109,21 +111,20 @@ void Predict::predictApp(char key) {
         }
 
         // Draw Largest Contours
-        Scalar color = Scalar(0, 0, 255);
-        drawContours(drawing1, feature_image, maxIndex, Scalar(255, 255, 255), FILLED); // fill white
+        drawContours(drawing1, feature_image, maxIndex, WHITE, FILLED); // fill white
 
         // Draw Contours
         Mat contourImg = Mat::zeros(cropFrame.size(), CV_8UC3);
-        drawContours(contourImg, feature_image, maxIndex, Scalar(0, 0, 255), 2, 8, hierarchy, 0, Point(0, 0));
+        drawContours(contourImg, feature_image, maxIndex, RED, 2, 8, hierarchy, 0, Point(0, 0));
 
         //Reset if too much noise
-        /*           Scalar sums = sum(drawing1);
-               int s = sums[0] + sums[1] + sums[2] + sums[3];
-               if (s >= RESET_THRESH)
-               {
-                   backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
-                   continue;
-               }*/
+               //    Scalar sums = sum(drawing1);
+               //int s = sums[0] + sums[1] + sums[2] + sums[3];
+               //if (s >= RESET_THRESH)
+               //{
+               //    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+               //    continue;
+               //}
 
        
         // Show the current frame and the foreground masks
@@ -177,6 +178,7 @@ void Predict::predictApp(char key) {
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
             cout << "Writing the letter: " << asl_letter << " -> to a file.\n";
             myfile.close();
+            displayLetter();
         }
     }
 
@@ -187,60 +189,53 @@ void Predict::predictApp(char key) {
 
 void Predict::displayLetter() {
 
-    int letterCount = 0;                    // number of letters captured since last display
+    int letterCount = 0; // number of letters captured since last displayletterCount = 0;
     char lastLetters[NUM_LAST_LETTERS] = { 0 };
 
     //creates a Mat object filled with zeros
     Mat letter_image = Mat::zeros(200, 200, CV_8UC3);
-    char lastExecLetter = 0;                // last letter sent
+    char lastExecLetter = 0; // last letter sent
 
-  
+    letterCount %= NUM_LAST_LETTERS;         // Show majority of last letters captured
+    lastLetters[letterCount++] = asl_letter; // input from f4
+    letter_image = Mat::zeros(200, 200, CV_8UC3);
 
-        //cout << "\nThread #5: Display output\n";
+    int counts[MAX_LETTERS + 1] = { 0 };
 
-        letterCount %= NUM_LAST_LETTERS;         // Show majority of last letters captured
-        lastLetters[letterCount++] = asl_letter; // input from f4
-        letter_image = Mat::zeros(200, 200, CV_8UC3);
+    for (int i = 0; i < NUM_LAST_LETTERS; i++)
+        counts[lastLetters[i] + 1 - 'a']++;
 
-        int counts[MAX_LETTERS + 1] = { 0 };
-
-        for (int i = 0; i < NUM_LAST_LETTERS; i++)
-            counts[lastLetters[i] + 1 - 'a']++;
-
-        int maxCount = 0;
-        char maxChar = 0;
-        for (int i = 0; i < MAX_LETTERS + 1; i++)
+    int maxCount = 0;
+    char maxChar = 0;
+    for (int i = 0; i < MAX_LETTERS + 1; i++)
+    {
+        if (counts[i] > maxCount)
         {
-            if (counts[i] > maxCount)
-            {
-                maxCount = counts[i];
-                maxChar = i;
-            }
+            maxCount = counts[i];
+            maxChar = i;
         }
+    }
 
-        if (maxChar && maxCount >= MIN_FREQ)
+    if (maxChar && maxCount >= MIN_FREQ)
+    {
+        maxChar = maxChar - 1 + 'a';
+        char buffer[2 * sizeof(char)];
+        sprintf_s(buffer, "%c", maxChar); // foramting
+
+        putText(letter_image, buffer, Point(10, 75), FONT_HERSHEY_SIMPLEX, 12, WHITE, 1, 1); // put the text on the this point
+
+        vector<vector<Point>> dummy;
+
+        dummy.push_back(letters[maxChar - 'a']);
+
+        drawContours(letter_image, dummy, maxIndex, BLUE, 2, 8, display, 0, Point(0, 0));
+        if (maxChar != lastExecLetter)
         {
-            maxChar = maxChar - 1 + 'a';
-            char buffer[2 * sizeof(char)];
-            sprintf_s(buffer, "%c", maxChar);
-
-            putText(letter_image, buffer, Point(10, 75), FONT_HERSHEY_SIMPLEX, 12, Scalar(255, 255, 255), 1, 1);
-
-            vector<vector<Point>> dummy;
-
-            dummy.push_back(letters[maxChar - 'a']);
-
-            drawContours(letter_image, dummy, 0, Scalar(255, 0, 0), 2, 8, hierarchy, 0, Point(0, 0));
-            if (maxChar != lastExecLetter)
-            {
-                lastExecLetter = maxChar;
-            }
+            lastExecLetter = maxChar;
         }
+    }
 
-        imshow("Letter", letter_image); // output f5--> letter_image
-        char q = waitKey(33);
-
-        //********************************//
- /*       cout << "\nDisplay letter exeuted...\n";*/
+    imshow("Letter", letter_image); // output f5--> letter_image
+    char q = waitKey(33);
 
  }

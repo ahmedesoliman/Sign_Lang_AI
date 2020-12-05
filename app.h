@@ -46,6 +46,12 @@ using namespace std;
 #define RESET_THRESH 25000000
 #define SAMPLE_RATE 1
 
+//Macro colors
+#define BLACK Scalar (0, 0, 0)
+#define WHITE Scalar (255, 255, 255)
+#define RED Scalar (0, 0, 255)
+#define BLUE Scalar (255, 0, 0)
+#define YELLOW Scalar (255, 255, 0)
 
 class App
 {
@@ -84,6 +90,8 @@ protected:
 	vector<Point> letters[MAX_LETTERS];		//A vector of point in OpenCV is just a standard C++ STL vector containing OpenCV Point objects 
 
 	vector<Vec4i> hierarchy;				// Vec4i is a structure for representing a vector with 4 dimensions, with each value an int
+	vector<Vec4i> display;				// Vec4i is a structure for representing a vector with 4 dimensions, with each value an int
+
 
 
 public:

@@ -67,11 +67,12 @@ One of the most important objectives of the model is to decrease the communicati
 # Threshold
 
 - Threshold for the colors is as below:
-- BlacK: 0, 0, 0
-- Red: 255, 0, 0
-- Green: 0, 255, 0
-- Yellow: 255, 255, 0
-- Blue: 0, 0, 255
+- BLACK: (0, 0, 0)
+- WHITE: (255, 255, 255)
+- RED: (0, 0, 255)
+- GREEN: (0, 255, 0)
+- BLUE: (255, 0, 0)
+- YELLOW: (255, 255, 0)
 
 # Future Scope
 

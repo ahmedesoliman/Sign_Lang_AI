@@ -29,7 +29,7 @@ Sign language is a language that consists of body movements, especially of hand 
 
 # The Idea:
 
-Usually, a sign language interpreter is used by deaf people to seek help for translating their thoughts to all of us. My prototype will help in identifying the alphabet and give the output in a text/speech format. Later these alphabets can be used to form sentences. The model helps the muted people to communicate with everyone and express themselves. This not only makes their life emotionally better but also makes them more employable and independent. It also becomes a lot easier for everyone to understand the muted people who would in-turn be able to help them.
+Usually, a sign language interpreter is used by deaf people to seek help for translating their thoughts to all of us. My prototype will help in identifying the alphabet and give the output in a text format. Later these alphabets can be used to form sentences. The model helps the muted people to communicate with everyone and express themselves. This not only makes their life emotionally better but also makes their life easier in the post covid-19 pandemic in communication and seeking help from medical professionals. As well as they become more employable and independent. It also becomes a lot easier for everyone to understand the muted people who would in-turn be able to help them.
 
 # Architecture:
 
@@ -53,6 +53,7 @@ One of the most important objectives of the model is to decrease the communicati
 - A new image should be captured once the system has processed and extraceted the sign from the previous image.
 
 # Train
+
 - Images should be saved as png images for the distance function to work
 - The system should have a feature to allow new users to train the letters.
 - There should be no overwriting of a letter refrence image with another letter during traning.

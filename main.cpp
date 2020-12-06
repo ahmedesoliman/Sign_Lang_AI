@@ -28,9 +28,7 @@ int main(int argc, char** argv)
     try {
         char keyboard = 0;           // last key pressed
         int training_mode = 0;       // 0 = no training; 1 = training
-
-        int debug_mode = 0;         // 0= no debug; 1= debug
-
+        int debug_mode = 0;          // 0= no debug; 1= debug
         int predict_mode = 0;        // 0= no predict; 1=predict
 
         cout << "Press: (T) to train - (P) to predict - (D) to Debug: ";
@@ -89,10 +87,8 @@ int main(int argc, char** argv)
 
             //predict.train();
         }
-        //else if (keyboard != "p" && keyboard != "P" && keyboard != "T" && keyboard != "t") {
-        //    throw "invalid input please try again!";
-        //}
-    } 
+
+    }
     catch (string str) {
         cout << str;
     }

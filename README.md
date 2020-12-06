@@ -25,8 +25,10 @@ Add to Include Directories.
 - Tell the compiler how the OpenCV library looks. This is done by providing a path to the header files (build/include)
 
 ```
-Add to Library Directories — Tell the linker where it can find the lib files for different modules.
+Add to Library Directories.
 ```
+
+- Tell the linker where it can find the lib files for different modules.
 
 ```
 Add Additional Dependencies — List .lib files for different modules.

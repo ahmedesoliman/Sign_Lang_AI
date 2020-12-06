@@ -3,7 +3,7 @@
 ## Requirements:
 
 - Visual Studio Community
-  - Download & install Visual Studio 2019 Community Edition
+  - Download & install Visual Studio 2019 Community Editio [-Here](https://visualstudio.microsoft.com/downloads/)
   - Make sure to select Desktop development with C++ and leave all settings as default and then click install
 - OpenCV
   - Download & extract prebuild OpenCV Current Version used 4.5.0

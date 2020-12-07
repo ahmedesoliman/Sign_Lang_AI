@@ -5,14 +5,15 @@ Sign Language AI
 
 ## Requirements:
 
-- Windows Operating seystem platform
+
 - Visual Studio Community
-  - Download & install Visual Studio 2019 Community Editior [- Here](https://visualstudio.microsoft.com/downloads/)
+  - Download & install Visual Studio 2019 Community Editor  [- Here](https://visualstudio.microsoft.com/downloads/)
   - Select Desktop development with C++ and leave all settings as default and then click install
 - OpenCV
-  - Download sprebuild OpenCV Current Version used 4.5.0 [- Here](https://opencv.org/releases/)
+  - Download prebuilt OpenCV Current Version used 4.5.0 [- Here](https://opencv.org/releases/)
   - Extract openCV Library to C:\
-  - Add openCV to windows enviroment path
+- Windows Operating system platform
+  - Add OpenCV to windows environment path
 
 ## Setup Steps:
 

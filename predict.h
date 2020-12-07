@@ -12,9 +12,10 @@ private:
 public:
 	Predict();
 	~Predict();
-	void predictApp(char);
-	void displayLetter();
-	void load_ASL();
+	void predictApp(char);		//this function predict the app
+	void displayLetter();		//this function displays the letter
+	void load_ASL();			//
+	virtual void print() {}		
 
 };
 

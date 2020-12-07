@@ -125,6 +125,5 @@ void Train::trainApp(char key) {
         // Manual reset the keyboard
         if (key == ' ')
             backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
-
     }
 }

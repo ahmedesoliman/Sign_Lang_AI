@@ -16,6 +16,8 @@ Sign Language AI
 
 ## Setup Steps:
 
+Complete visual studio setup steps [- Here](https://sites.google.com/d/1mhZg7EV6AVUCQJQLDzWyVgBgYW0AqTDq/p/1y5K6nAOBdC6SNCbf7RO-rp15kDXE8Tve)
+
 ```
 Create a project in visual studio
 ```

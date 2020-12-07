@@ -1,21 +1,27 @@
 # Sign_Lang_AI
 
+CSC211H_Honors_Project_Ahmed_Soliman_Fall2020
+Sign Language AI
+
 ## Requirements:
 
 - Windows Operating seystem platform
 - Visual Studio Community
-  - Download & install Visual Studio 2019 Community Editio [- Here](https://visualstudio.microsoft.com/downloads/)
-  - Make sure to select Desktop development with C++ and leave all settings as default and then click install
+  - Download & install Visual Studio 2019 Community Editior [- Here](https://visualstudio.microsoft.com/downloads/)
+  - Select Desktop development with C++ and leave all settings as default and then click install
 - OpenCV
-  - Downloadprebuild OpenCV Current Version used 4.5.0 [- Here](https://opencv.org/releases/)
+  - Download sprebuild OpenCV Current Version used 4.5.0 [- Here](https://opencv.org/releases/)
   - Extract openCV Library to C:\
   - Add openCV to windows enviroment path
 
 ## Setup Steps:
+
 ```
 Create a project in visual studio
 ```
+
 - Choose console app then configure the project settings
+
 ```
 Set platform target to x64
 ```
@@ -58,11 +64,11 @@ Usually, a sign language interpreter is used by deaf people to seek help for tra
 
 <img src= "./images/Project_Diagram.jpg" width=auto height= auto>
 
-The proposed system uses the Convolutional Neural Network (CNN) architecture. CNN network consists of different layers that process the input alphabets and symbols and produces the desired output. I’m working on creating a model that can help society in a broader way by bridging the communication gap between Deaf-Muted people and everyone else. I propose a system, acting as an interface between the Deaf-dumb community and non-disabled people based on American Sign Language (ASL). The speech Conversion system helps in decoding those symbols without the need of an expert person who understands sign language.
+The proposed system uses the Convolutional Neural Network (CNN) architecture. CNN network consists of different layers that process the input alphabets and symbols and produces the desired output. I’m working on creating a model that can help society in a broader way by bridging the communication gap between Deaf-Muted people and everyone else. I propose a system, acting as an interface between the Deaf-mute community and non-disabled people based on American Sign Language (ASL). The speech Conversion system helps in decoding those symbols without the need of an expert person who understands sign language.
 
 The feature detection is done using various contour analysis and feature extraction built in the OpenCV Library. The hand feature detection is taken through any type of camera or webcam connected to a computer which is then processed into a binary image upon which contour analysis is done and to optimize such actions using OpenCV functions.
 
-The extracted feature is then passed into the neural network algorithms which pass the feature through various layers and predict a single output which is then mapped to a text file.
+The extracted feature is then passed into the neural network algorithms which process the feature through various layers and predict a single output which is then mapped to a text file.
 
 One of the most important objectives of the model is to decrease the communication gap between hearing-impaired people and everyone else and use this technology to its best in order to smooth integration of these differently-abled people in our society.
 

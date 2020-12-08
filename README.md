@@ -11,7 +11,7 @@ Sign Language AI
 - OpenCV
   - Download prebuilt OpenCV Current Version used 4.5.0 [- Here](https://opencv.org/releases/)
   - Extract openCV Library to C:\
-- Windows Operating system platform
+- Windows 10 Operating system platform (64-bit)
   - Add OpenCV to windows environment path
 
 ## Setup Steps:

@@ -13,8 +13,9 @@ Sign Language AI
   - Extract openCV Library to C:\
 - Windows 10 Operating system platform (64-bit)
   - Add OpenCV to windows environment path
+    <img src= "./images/add_path.png" width=auto height= auto>
 
-## Setup Steps:
+## Visual Studio Setup Steps:
 
 Complete visual studio setup steps [- Here](https://sites.google.com/view/sign-language-ai/setup)
 

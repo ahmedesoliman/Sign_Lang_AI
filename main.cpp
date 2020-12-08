@@ -3,7 +3,7 @@
 Final Project
 Name: Ahmed Soliman
 ID# : 24033795
-Class : Fall 2020, CSC 211H 0500[64041] - (Borough of Manhattan CC)
+Class : Fall 2020, CSC 211H 0500[64041] - (Borough of Manhattan CC (BMCC), City University of New York (CUNY))
 Date : 12 / 15 / 2020
 Time : 05 : 30PM
 Instructor Name : Dr.Azhar

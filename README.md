@@ -1,7 +1,8 @@
 # Sign_Lang_AI
 
+Sign Language AI is a project build for CSC211H class at BMCC
+
 CSC211H_Honors_Project_Ahmed_Soliman_Fall2020
-Sign Language AI
 
 ## Requirements:
 
@@ -108,6 +109,15 @@ One of the most important objectives of the model is to decrease the communicati
 - GREEN: (0, 255, 0)
 - BLUE: (255, 0, 0)
 - YELLOW: (255, 255, 0)
+
+# What I learned:
+
+- How to use visual studio as an IDE for developing projects
+- Learned a lot about OpendCV library and framework for image processing
+- How to Use Background Subtraction Methods in OpenCV
+- Understanding findcontours() function from OpenCV
+- Understanding the difference between is Mat, vector and IplImage in OpenCV
+- Including external framework and open OpenCV libraries to the visual studio project
 
 ## Future Scope
 

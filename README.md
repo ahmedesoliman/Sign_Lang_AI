@@ -8,7 +8,7 @@ Sign Language AI
 - Visual Studio Community
   - Download & install Visual Studio 2019 Community Editor [- Here](https://visualstudio.microsoft.com/downloads/)
   - Select Desktop development with C++ and leave all settings as default and then click install
-<img src= "./images/install_c++.png" width=100 height= auto>
+<img src= "./images/install_c++.png" width=auto height= auto>
 - OpenCV
   - Download prebuilt OpenCV Current Version used 4.5.0 [- Here](https://opencv.org/releases/)
   - Extract openCV Library to C:\

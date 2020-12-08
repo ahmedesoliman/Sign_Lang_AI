@@ -5,9 +5,8 @@ Sign Language AI
 
 ## Requirements:
 
-
 - Visual Studio Community
-  - Download & install Visual Studio 2019 Community Editor  [- Here](https://visualstudio.microsoft.com/downloads/)
+  - Download & install Visual Studio 2019 Community Editor [- Here](https://visualstudio.microsoft.com/downloads/)
   - Select Desktop development with C++ and leave all settings as default and then click install
 - OpenCV
   - Download prebuilt OpenCV Current Version used 4.5.0 [- Here](https://opencv.org/releases/)
@@ -17,7 +16,7 @@ Sign Language AI
 
 ## Setup Steps:
 
-Complete visual studio setup steps [- Here](https://sites.google.com/d/1mhZg7EV6AVUCQJQLDzWyVgBgYW0AqTDq/p/1y5K6nAOBdC6SNCbf7RO-rp15kDXE8Tve)
+Complete visual studio setup steps [- Here](https://sites.google.com/view/sign-language-ai/setup)
 
 ```
 Create a project in visual studio

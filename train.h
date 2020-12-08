@@ -14,6 +14,7 @@ public:
 	Train();
 	~Train();
 	void trainApp(char);
+	virtual void print() {}
 
 };
 

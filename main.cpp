@@ -21,7 +21,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    App app;                        //App object
+    //App app;                        //App object
     Predict predict;                //predict object
     Train train;                    //train object
 
@@ -50,20 +50,19 @@ int main(int argc, char** argv)
         }
         if (training_mode)
         {
-            app.asl_init();
+            train.asl_init();
             train.trainApp(keyboard);
 
         }
 
         if (predict_mode) {
-            predict.load_ASL();
+            predict.asl_init();
             predict.predictApp(keyboard);
         }
         if (debug_mode) {
 
             //predict.train();
-            app.asl_init();
-            app.run(keyboard);
+            train.asl_init();
 
             //std::thread t1(&App::f1_captureimage, &app);
 
@@ -88,6 +87,9 @@ int main(int argc, char** argv)
             //predict.train();
         }
 
+        else {
+            throw "Invlaid input!";
+        }
     }
     catch (string str) {
         cout << str;

@@ -186,15 +186,11 @@ void Predict::predictApp(char key) {
             myfile.open("output.txt", ios::out | ios::app);
             myfile << asl_letter;
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
-            cout << "Writing the letter: " << asl_letter << " -> to a file.\n";
+         /*   cout << "Writing the letter: " << asl_letter << " -> to a file.\n";*/
             myfile.close();
             displayLetter();
         }
     }
-
-    //// Delete capture object
-    //destroyAllWindows(); // destroy the all open windows
-    //capture.release();   // Delete capture object
 }
 
 void Predict::displayLetter() {

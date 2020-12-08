@@ -87,9 +87,9 @@ int main(int argc, char** argv)
             //predict.train();
         }
 
-        else {
-            throw "Invlaid input!";
-        }
+        //else {
+        //    throw "Invlaid input!";
+        //}
     }
     catch (string str) {
         cout << str;

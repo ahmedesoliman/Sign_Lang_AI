@@ -351,74 +351,74 @@ double App::distance(vector<Point> a, vector<Point> b)
 } /* end of distance()*/
 
 void App::run() {
-    try
-    {
-        char keyboard = 0;     // last key pressed
-        int training_mode = 0; // 0 = no training; 1 = training
-        int debug_mode = 0;    // 0= no debug; 1= debug
-        int predict_mode = 0;  // 0= no predict; 1=predict
+    //try
+    //{
+    //    char keyboard = 0;     // last key pressed
+    //    int training_mode = 0; // 0 = no training; 1 = training
+    //    int debug_mode = 0;    // 0= no debug; 1= debug
+    //    int predict_mode = 0;  // 0= no predict; 1=predict
 
-        cout << "Press: (T) to train - (P) to predict - (D) to Debug: ";
+    //    cout << "Press: (T) to train - (P) to predict - (D) to Debug: ";
 
-        cin >> keyboard;
+    //    cin >> keyboard;
 
-        if (keyboard == 'T' || keyboard == 't')
-        {
-            training_mode = 1;
-        }
+    //    if (keyboard == 'T' || keyboard == 't')
+    //    {
+    //        training_mode = 1;
+    //    }
 
-        if (keyboard == 'D' || keyboard == 'd')
-        {
-            debug_mode = 1;
-        }
+    //    if (keyboard == 'D' || keyboard == 'd')
+    //    {
+    //        debug_mode = 1;
+    //    }
 
-        if (keyboard == 'P' || keyboard == 'p')
-        {
+    //    if (keyboard == 'P' || keyboard == 'p')
+    //    {
 
-            predict_mode = 1;
-        }
-        if (training_mode)
-        {
-            asl_init();
-            trainApp(keyboard);
-        }
+    //        predict_mode = 1;
+    //    }
+    //    if (training_mode)
+    //    {
+    //        asl_init();
+    //        trainApp(keyboard);
+    //    }
 
-        if (predict_mode)
-        {
-            asl_init();
-            predictApp(keyboard);
-        }
-        if (debug_mode)
-        {
+    //    if (predict_mode)
+    //    {
+    //        asl_init();
+    //        predictApp(keyboard);
+    //    }
+    //    if (debug_mode)
+    //    {
 
-            //predict.train();
-            //train.asl_init();
+    //        //predict.train();
+    //        //train.asl_init();
 
-            //std::thread t1(&App::f1_captureimage, &app);
+    //        //std::thread t1(&App::f1_captureimage, &app);
 
-            //std::thread t2(&App::f2_extracthand, &app);
+    //        //std::thread t2(&App::f2_extracthand, &app);
 
-            //std::thread t3(&App::f3_extractfeature, &app);
+    //        //std::thread t3(&App::f3_extractfeature, &app);
 
-            //std::thread t4(&App::f4_identifyletter, &app);
+    //        //std::thread t4(&App::f4_identifyletter, &app);
 
-            //std::thread t5(&App::f5_displayletter, &app);
+    //        //std::thread t5(&App::f5_displayletter, &app);
 
-            //t1.join();
-            //t2.join();
-            //t3.join();
-            //t4.join();
-            //t5.join();
+    //        //t1.join();
+    //        //t2.join();
+    //        //t3.join();
+    //        //t4.join();
+    //        //t5.join();
 
-            //predict.train();
-        }
+    //        //predict.train();
+    //    }
 
-        //else {
-        //    throw "Invlaid input!";
-        //}
-    }
-    catch (string str)
-    {
-        cout << str;
-    }
+    //    //else {
+    //    //    throw "Invlaid input!";
+    //    //}
+    //}
+    //catch (string str)
+    //{
+    //    cout << str;
+    //}
 }

@@ -6,17 +6,16 @@
 
 #include "app.h"
 
-class Predict : public App {
+class Predict : public App
+{
 private:
-
 public:
 	Predict();
 	~Predict();
-	void predictApp(char);		//this function predict the app
-	void displayLetter();		//this function displays the letter
-	void load_ASL();			//
-	virtual void print() {}		
-
+	void predictApp(char); //this function predict the app
+	void displayLetter();  //this function displays the letter
+	void load_ASL();       //
+	virtual void app() {}
 };
 
 #endif // end of PREDICT_H

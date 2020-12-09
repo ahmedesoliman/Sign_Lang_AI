@@ -3,12 +3,13 @@
 #include "predict.h"
 
 //defualt constructor
-Predict::Predict() {
-
+Predict::Predict()
+{
 }
 
 //default destructor
-Predict::~Predict() {
+Predict::~Predict()
+{
 
     // Delete capture object
     destroyAllWindows(); // destroy the all open windows
@@ -22,13 +23,14 @@ void Predict::load_ASL()
     {
         char buffer[13 * sizeof(char)];
 
-        sprintf_s(buffer, "data/%c.png", ('a' + i));  // foramting
+        sprintf_s(buffer, "data/%c.png", ('a' + i)); // foramting
 
         Mat img1 = imread(buffer, 1);
 
         if (img1.data)
         {
-            Mat img2, threshold_output;;
+            Mat img2, threshold_output;
+            ;
 
             cvtColor(img1, img2, COLOR_RGB2GRAY);
 
@@ -54,7 +56,8 @@ void Predict::load_ASL()
 
 } /* end of asl_init()*/
 
-void Predict::predictApp(char key) {
+void Predict::predictApp(char key)
+{
 
     capture = VideoCapture(0);
 
@@ -64,7 +67,8 @@ void Predict::predictApp(char key) {
     while (key != KEY_ESC)
     {
         /*    cout << "inside training \n";*/
-        try {
+        try
+        {
             if (!capture.isOpened())
             {
                 // Error in opening the video input
@@ -74,10 +78,12 @@ void Predict::predictApp(char key) {
             }
         }
 
-        catch (string str) {
+        catch (string str)
+        {
             cout << str;
         }
-        try {
+        try
+        {
             if (!capture.read(frame))
             {
                 cout << "Unable to read next frame..." << endl;
@@ -86,7 +92,8 @@ void Predict::predictApp(char key) {
                 throw " Unable to read next frame...  \n";
             }
         }
-        catch (string str) {
+        catch (string str)
+        {
             cout << str;
         }
 
@@ -116,7 +123,7 @@ void Predict::predictApp(char key) {
             if (area > largest_area)
             {
                 largest_area = area;
-                maxIndex = j;   // Store the index of largest contour
+                maxIndex = j; // Store the index of largest contour
             }
         }
 
@@ -128,21 +135,19 @@ void Predict::predictApp(char key) {
         drawContours(contourImg, feature_image, maxIndex, RED, 2, 8, hierarchy, 0, Point(0, 0));
 
         //Reset if too much noise
-               //    Scalar sums = sum(drawing1);
-               //int s = sums[0] + sums[1] + sums[2] + sums[3];
-               //if (s >= RESET_THRESH)
-               //{
-               //    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
-               //    continue;
-               //}
+        //    Scalar sums = sum(drawing1);
+        //int s = sums[0] + sums[1] + sums[2] + sums[3];
+        //if (s >= RESET_THRESH)
+        //{
+        //    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+        //    continue;
+        //}
 
-       
         // Show the current frame and the foreground masks
         imshow("Crop Frame", cropFrame);
         imshow("Mask", drawing1);
         imshow("Foregound Mask", fgMaskMOG2);
         imshow("Contour image", contourImg);
-
 
         //if (contourImg.rows > 0)
         //    imshow("Contour", contourImg);
@@ -186,14 +191,15 @@ void Predict::predictApp(char key) {
             myfile.open("output.txt", ios::out | ios::app);
             myfile << asl_letter;
             cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
-         /*   cout << "Writing the letter: " << asl_letter << " -> to a file.\n";*/
+            /*   cout << "Writing the letter: " << asl_letter << " -> to a file.\n";*/
             myfile.close();
             displayLetter();
         }
     }
 }
 
-void Predict::displayLetter() {
+void Predict::displayLetter()
+{
 
     int letterCount = 0; // number of letters captured since last displayletterCount = 0;
     char lastLetters[NUM_LAST_LETTERS] = { 0 };
@@ -243,5 +249,4 @@ void Predict::displayLetter() {
 
     imshow("Letter", letter_image); // output f5--> letter_image
     char q = waitKey(33);
-
- }
+}

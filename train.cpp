@@ -2,17 +2,20 @@
 #include "train.h"
 
 //default constructor
-Train::Train() {
+Train::Train()
+{
 }
 
 //default destructor
-Train::~Train() {
+Train::~Train()
+{
 
     destroyAllWindows(); // destroy the all open windows
     capture.release();   // Delete capture object
 }
 
-void Train::trainApp(char key) {
+void Train::trainApp(char key)
+{
 
     capture = VideoCapture(0);
 
@@ -22,7 +25,8 @@ void Train::trainApp(char key) {
     while (key != KEY_ESC)
     {
         /*    cout << "inside training \n";*/
-        try {
+        try
+        {
             if (!capture.isOpened())
             {
                 // Error in opening the video input
@@ -31,10 +35,12 @@ void Train::trainApp(char key) {
                 throw "Cannot Open Webcam... \n";
             }
         }
-        catch (string str) {
+        catch (string str)
+        {
             cout << str;
         }
-        try{
+        try
+        {
             if (!capture.read(frame))
             {
                 cout << "Unable to read next frame..." << endl;
@@ -43,7 +49,8 @@ void Train::trainApp(char key) {
                 throw " Unable to read next frame... \n";
             }
         }
-        catch (string str) {
+        catch (string str)
+        {
             cout << str;
         }
 
@@ -87,19 +94,18 @@ void Train::trainApp(char key) {
 
         //Reset if too much noise
         /*           Scalar sums = sum(drawing1);
-               int s = sums[0] + sums[1] + sums[2] + sums[3];
-               if (s >= RESET_THRESH)
-               {
-                   backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
-                   continue;
-               }*/
+                   int s = sums[0] + sums[1] + sums[2] + sums[3];
+                   if (s >= RESET_THRESH)
+                   {
+                       backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+                       continue;
+                   }*/
 
-        // Show the current frame and the foreground masks
+                   // Show the current frame and the foreground masks
         imshow("Crop Frame", cropFrame);
         imshow("Mask", drawing1);
         imshow("Foregound Mask", fgMaskMOG2);
         imshow("Contour image", contourImg);
-
 
         //if (contourImg.rows > 0)
         //    imshow("Contour", contourImg);
@@ -113,7 +119,7 @@ void Train::trainApp(char key) {
             int keyIndex = 0 + key - 'a';
 
             // save in memory
- /*           letters[keyIndex] = contours[maxIndex];*/
+            /*           letters[keyIndex] = contours[maxIndex];*/
 
             // write to folder
             char buffer[13 * sizeof(char)];

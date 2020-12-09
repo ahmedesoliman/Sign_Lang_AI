@@ -21,13 +21,14 @@ void App::asl_init()
     {
         char buffer[13 * sizeof(char)];
 
-        sprintf_s(buffer, "data/%c.png", ('a' + i));  // foramting
+        sprintf_s(buffer, "data/%c.png", ('a' + i)); // foramting
 
         Mat img1 = imread(buffer, 1);
 
         if (img1.data)
         {
-            Mat img2, threshold_output;;
+            Mat img2, threshold_output;
+            ;
 
             cvtColor(img1, img2, COLOR_RGB2GRAY);
 
@@ -106,10 +107,10 @@ void App::f2_extracthand()
         cout << "Thread #2: Extract hand\n";
 
         /*      if (reset <= 10)
-                {
-                    reset++;
-                    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 16, true);
-                }*/
+                    {
+                        reset++;
+                        backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 16, true);
+                    }*/
 
         backGroundMOG2->apply(rgb_image, binary_image, 0);
 
@@ -179,7 +180,7 @@ void App::f3_extractfeature()
         imshow("drwaing", drawing);
         imshow("hierarchy", hierarchy);
         /*     if (contourImg.rows > 0)
-                    imshow("th3_extractfeature", contourImg);*/
+                        imshow("th3_extractfeature", contourImg);*/
 
         char q = waitKey(33);
 
@@ -189,7 +190,7 @@ void App::f3_extractfeature()
         featureReady = true;
         cond.notify_one();
     }
-}  /* end of f3_extractfeature()*/
+} /* end of f3_extractfeature()*/
 
 //this fucntion identifies the letter
 void App::f4_identifyletter()
@@ -347,4 +348,3 @@ double App::distance(vector<Point> a, vector<Point> b)
 
     return sqrt((double)maxDist);
 } /* end of distance()*/
-

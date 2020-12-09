@@ -1,3 +1,4 @@
+/*Copyrights @ Ahmed Soliman www.ahmedesoliman.com*/
 //app.h
 #pragma once
 
@@ -101,7 +102,8 @@ public:
 	void asl_init();                               // this method iniallized & preload letter images when the app is started
 	int distance_2(vector<Point>, vector<Point>);  //this method take two vectors of points a and b
 	double distance(vector<Point>, vector<Point>); //this method find between the distance of two vectors of points
-	virtual void app() = 0;
+	virtual void app() = 0;							//pure virtual function to change app to abstract class
+	void run();
 };
 
 #endif // end of APP_H

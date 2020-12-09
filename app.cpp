@@ -1,3 +1,4 @@
+/*Copyrights @ Ahmed Soliman www.ahmedesoliman.com*/
 // app.cpp
 #include "app.h"
 
@@ -62,8 +63,8 @@ void App::f1_captureimage()
     while (true)
     {
 
-        //unique_lock<mutex> locker(mtx);
-        //cond.wait(locker /*, [this]{return displayReady;}*/);
+        unique_lock<mutex> locker(mtx);
+        cond.wait(locker /*, [this]{return displayReady;}*/);
 
         cout << "Thread #1: Capture Image\n ";
 
@@ -348,3 +349,76 @@ double App::distance(vector<Point> a, vector<Point> b)
 
     return sqrt((double)maxDist);
 } /* end of distance()*/
+
+void App::run() {
+    try
+    {
+        char keyboard = 0;     // last key pressed
+        int training_mode = 0; // 0 = no training; 1 = training
+        int debug_mode = 0;    // 0= no debug; 1= debug
+        int predict_mode = 0;  // 0= no predict; 1=predict
+
+        cout << "Press: (T) to train - (P) to predict - (D) to Debug: ";
+
+        cin >> keyboard;
+
+        if (keyboard == 'T' || keyboard == 't')
+        {
+            training_mode = 1;
+        }
+
+        if (keyboard == 'D' || keyboard == 'd')
+        {
+            debug_mode = 1;
+        }
+
+        if (keyboard == 'P' || keyboard == 'p')
+        {
+
+            predict_mode = 1;
+        }
+        if (training_mode)
+        {
+            asl_init();
+            trainApp(keyboard);
+        }
+
+        if (predict_mode)
+        {
+            asl_init();
+            predictApp(keyboard);
+        }
+        if (debug_mode)
+        {
+
+            //predict.train();
+            //train.asl_init();
+
+            //std::thread t1(&App::f1_captureimage, &app);
+
+            //std::thread t2(&App::f2_extracthand, &app);
+
+            //std::thread t3(&App::f3_extractfeature, &app);
+
+            //std::thread t4(&App::f4_identifyletter, &app);
+
+            //std::thread t5(&App::f5_displayletter, &app);
+
+            //t1.join();
+            //t2.join();
+            //t3.join();
+            //t4.join();
+            //t5.join();
+
+            //predict.train();
+        }
+
+        //else {
+        //    throw "Invlaid input!";
+        //}
+    }
+    catch (string str)
+    {
+        cout << str;
+    }
+}

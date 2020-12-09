@@ -1,10 +1,11 @@
+/*Copyrights @ Ahmed Soliman www.ahmedesoliman.com*/
 //train.cpp
 #include "train.h"
 
 //default constructor
 Train::Train()
 {
-}
+}/*end of Train()*/
 
 //default destructor
 Train::~Train()
@@ -12,7 +13,7 @@ Train::~Train()
 
     destroyAllWindows(); // destroy the all open windows
     capture.release();   // Delete capture object
-}
+}/*end of ~Train()*/
 
 void Train::trainApp(char key)
 {
@@ -132,4 +133,4 @@ void Train::trainApp(char key)
         if (key == ' ')
             backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
     }
-}
+}/*end of trainApp(key)*/

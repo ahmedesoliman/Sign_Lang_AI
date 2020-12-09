@@ -1,3 +1,4 @@
+/*Copyrights @ Ahmed Soliman www.ahmedesoliman.com*/
 //predict.h
 #pragma once
 
@@ -10,12 +11,12 @@ class Predict : public App
 {
 private:
 public:
-	Predict();
-	~Predict();
-	void predictApp(char); //this function predict the app
-	void displayLetter();  //this function displays the letter
-	void load_ASL();       //
-	virtual void app() {}
+	Predict();  //default constructor
+	~Predict();	//defualt destructor
+	void predictApp(char);	//this function predict the app
+	void displayLetter();	//this function displays the letter
+	void load_ASL();		//this function loads the letters that was learned for prediction
+	virtual void app() {}	//this method overrides app pure virtual function
 };
 
 #endif // end of PREDICT_H

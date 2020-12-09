@@ -1,3 +1,4 @@
+/*Copyrights @ Ahmed Soliman www.ahmedesoliman.com*/
 // predict.cpp
 
 #include "predict.h"
@@ -73,7 +74,7 @@ void Predict::predictApp(char key)
             {
                 // Error in opening the video input
                 cout << "Cannot Open Webcam... " << endl;
-                exit(0);
+                exit(1);
                 throw "Cannot Open Webcam... \n";
             }
         }
@@ -88,7 +89,7 @@ void Predict::predictApp(char key)
             {
                 cout << "Unable to read next frame..." << endl;
                 cout << "Exiting..." << endl;
-                exit(0);
+                exit(1);
                 throw " Unable to read next frame...  \n";
             }
         }

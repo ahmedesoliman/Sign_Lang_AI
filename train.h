@@ -1,3 +1,4 @@
+/*Copyrights @ Ahmed Soliman www.ahmedesoliman.com*/
 //train.h
 #pragma once
 
@@ -10,10 +11,10 @@ class Train : public App
 
 private:
 public:
-	Train();
-	~Train();
-	void trainApp(char);
-	virtual void app() {}
+	Train(); //default constructor
+	~Train(); //default destructor
+	void trainApp(char); //this function trains the application and saves an images to the dataset
+	virtual void app() {} //this method overrides app pure virtual function
 };
 
 #endif // end of TRAIN_H

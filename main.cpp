@@ -31,7 +31,8 @@ int main(int argc, char** argv)
         int debug_mode = 0;    // 0= no debug; 1= debug
         int predict_mode = 0;  // 0= no predict; 1=predict
 
-        cout << "Press: (T) to train - (P) to predict - (D) to Debug: ";
+        train.welcome();
+        cout << "\n Press: (T) to train - (P) to predict - (D) to Debug: \n";
 
         cin >> keyboard;
 
@@ -52,12 +53,14 @@ int main(int argc, char** argv)
         }
         if (training_mode)
         {
+
             train.asl_init();
             train.trainApp(keyboard);
         }
 
         if (predict_mode)
         {
+
             predict.asl_init();
             predict.predictApp(keyboard);
         }

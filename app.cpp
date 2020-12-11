@@ -422,3 +422,7 @@ void App::run() {
     //    cout << str;
     //}
 }
+void App::welcome() {
+
+    cout << "**** WELCOME TO SIGN LANGUGE AI ****";
+}

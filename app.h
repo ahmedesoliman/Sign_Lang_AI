@@ -103,6 +103,7 @@ public:
 	int distance_2(vector<Point>, vector<Point>);  //this method take two vectors of points a and b
 	double distance(vector<Point>, vector<Point>); //this method find between the distance of two vectors of points
 	virtual void app() = 0;							//pure virtual function to change app to abstract class
+	void welcome();									//display a welcome message
 	void run();
 };
 

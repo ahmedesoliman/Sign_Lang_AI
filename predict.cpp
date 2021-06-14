@@ -24,7 +24,7 @@ void Predict::load_ASL()
     {
         char buffer[13 * sizeof(char)];
 
-        sprintf_s(buffer, "data/%c.png", ('a' + i)); // foramting
+        sprintf_s(buffer, "train/%c.png", ('a' + i)); // foramting
 
         Mat img1 = imread(buffer, 1);
 
@@ -60,7 +60,7 @@ void Predict::load_ASL()
 void Predict::predictApp(char key)
 {
 
-    capture = VideoCapture(0);
+    capture = VideoCapture(1);
 
     //Creates MOG2 Background Subtractor.
     backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);

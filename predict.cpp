@@ -63,7 +63,7 @@ void Predict::predictApp(char key)
     capture = VideoCapture(1);
 
     //Creates MOG2 Background Subtractor.
-    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
+    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, true);
 
     while (key != KEY_ESC)
     {

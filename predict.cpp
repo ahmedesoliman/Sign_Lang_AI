@@ -31,7 +31,6 @@ void Predict::load_ASL()
         if (img1.data)
         {
             Mat img2, threshold_output;
-            ;
 
             cvtColor(img1, img2, COLOR_RGB2GRAY);
 
@@ -60,10 +59,10 @@ void Predict::load_ASL()
 void Predict::predictApp(char key)
 {
 
-    capture = VideoCapture(1);
+    capture = VideoCapture(0);
 
     //Creates MOG2 Background Subtractor.
-    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, true);
+    backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);
 
     while (key != KEY_ESC)
     {
@@ -189,11 +188,16 @@ void Predict::predictApp(char key)
                 asl_letter = 0;
             }
             ofstream myfile;
-            myfile.open("output.txt", ios::out | ios::app);
-            myfile << asl_letter;
-            cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
-            /*   cout << "Writing the letter: " << asl_letter << " -> to a file.\n";*/
+            
+            if (isalpha(asl_letter)) {
+                myfile.open("C:\\Unity_Projects\\Sign_AI_VR_Game\\Sign_AI_VR_Game_V.1.0\\Assets\\StreamingAssets\\RecallText\\Alphabets.txt", ios::out | ios::app);
+                myfile << asl_letter;
+                cout << "The letter is: " << asl_letter << " | difference: " << lowestDiff << endl;
+                /*   cout << "Writing the letter: " << asl_letter << " -> to a file.\n";*/
+            }
+           
             myfile.close();
+
             displayLetter();
         }
     }

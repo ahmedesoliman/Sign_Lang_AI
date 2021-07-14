@@ -18,7 +18,7 @@ Train::~Train()
 void Train::trainApp(char key)
 {
 
-    capture = VideoCapture(1);
+    capture = VideoCapture(0);
 
     //Creates MOG2 Background Subtractor.
     backGroundMOG2 = createBackgroundSubtractorMOG2(10000, 200, false);

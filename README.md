@@ -2,6 +2,10 @@
 
 Sign Language AI is a project build for CSC211H class at BMCC
 
+A command line computer vision application, implementing a system acting as an interface between the Deaf-Muted communities and non-deaf people based on American Sign Language (ASL).  
+Technologies used: OpenCV, C++, Vue.JS and IBM Cloud Services
+
+
 CSC211H_Honors_Project_Ahmed_Soliman_Fall2020
 
 ## Requirements:
